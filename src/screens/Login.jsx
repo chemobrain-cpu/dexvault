@@ -14,13 +14,11 @@ const LoginScreen = () => {
     const [isAuthError, setIsAuthError] = useState(false);
     const [authInfo, setAuthInfo] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [progress, setProgress] = useState(0); // Progress state
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const updateAuthError = useCallback(() => {
-        setIsAuthError(prev => !prev);
-        setAuthInfo('');
-    }, []);
+ 
 
     const handleEmailChange = (e) => {
         const text = e.target.value;
@@ -41,29 +39,49 @@ const LoginScreen = () => {
         }
         setIsEmailValid('');
         setIsLoading(true);
+        setProgress(0.2); // Start progress when user clicks Continue
+
         let res = await dispatch(authenticate({ email }));
 
         if (!res.bool) {
             setIsLoading(false);
             setIsAuthError(true);
             setAuthInfo(res.message);
+            setProgress(0); // Reset progress
             return;
         }
+
         setIsLoading(false);
-        navigate(res.url, { state: { email } });
+        navigate(`/${res.url}`,{ state: { email } });
     };
 
     return (
         <>
             {isAuthError && <AuthModal modalVisible={isAuthError} updateVisibility={updateAuthError} message={authInfo} />}
             <div className={styles.container}>
-
-
                 
+               
                 <div className={styles.innerContainer}>
+                    {/* Progress Bar */}
+                <div className={styles.progress}>
+                        <div className={styles.progressbar}>
+                            <div className={styles.progressBarFilled} style={{ width: '100%' }}></div>
+                        </div>
+                        <div className={styles.progressbar}>
+                            <div className={styles.progressBarFilled} style={{ width: '50%' }}></div>
+                        </div>
+                        <div className={styles.progressbar}>
+                            <div className={styles.progressBarFilled} style={{ width: '0%' }}></div>
+                        </div>
+                        <div className={styles.progressbar}>
+                            <div className={styles.progressBarFilled} style={{ width: '0%' }}></div>
+                        </div>
+                    </div>
                     <h2 className={styles.title}>Log in or Create</h2>
                     <h3 className={styles.subtitle}>Account</h3>
                     <p className={styles.description}>Choose the method to create an account or log in to Dexvault.</p>
+
+                    
 
                     <input
                         type="email"
@@ -88,10 +106,10 @@ const LoginScreen = () => {
                     </div>
 
                 </div>
-
             </div>
         </>
     );
 };
 
 export default LoginScreen;
+

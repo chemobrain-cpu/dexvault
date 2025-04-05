@@ -185,7 +185,15 @@ export const authenticate = (data) => {
         let data = await response.json()
         return {
           bool: true,
-          url: 'Password'
+          url: 'password'
+        }
+      }
+      if (response.status === 202) {
+
+        let data = await response.json()
+        return {
+          bool: true,
+          url: 'passcode'
         }
       }
 
@@ -195,7 +203,7 @@ export const authenticate = (data) => {
 
         return {
           bool: true,
-          url: 'Verification',
+          url: 'verification',
         }
       }
     } catch (err) {
@@ -208,7 +216,6 @@ export const authenticate = (data) => {
 
   }
 }
-
 
 export const verifyEmail = (data) => {
   return async (dispatch, getState) => {

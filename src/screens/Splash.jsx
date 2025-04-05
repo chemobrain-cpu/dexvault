@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Splash.module.css'; // Assuming you have a separate file for the styles
+import { checkIfIsLoggedIn } from '../store/action/appStorage';
 
 const Splash = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -11,7 +12,10 @@ const Splash = () => {
   };
 
   useEffect(() => {
+  setTimeout(()=>{
     fetchData();
+  },5000)
+ 
   }, []);
 
   const fetchData = async () => {

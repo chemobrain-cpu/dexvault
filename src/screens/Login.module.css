@@ -5,7 +5,7 @@
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background-color: #fbfafa;
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 0px;
@@ -19,6 +19,27 @@
     border-radius: 15px;
     font-family: 'ABeeZee';
 }
+
+  
+.progress {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .progressbar {
+    width: 50px;
+    height: 4px;
+    margin-right: 8px;
+    background-color: #E5E7EB;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .progressBarFilled {
+    height: 100%;
+    background-color: #4F46E5;
+  }
 
 .title {
     font-size: 28px;
@@ -57,7 +78,7 @@
     font-family: 'ABeeZee';
 }
 
-.button {
+.button,.importbutton,.createbutton {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
@@ -71,10 +92,16 @@
     display:flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.2s ease;
 }
 
-.button:hover {
+.button:hover,.importbutton:hover,.createbutton:hover {
     background-color: #3b3cc4;
+}
+
+.importbutton{
+    background-color: #ededed;
+    color:#3b3cc4;
 }
 
 .disabledButton {
@@ -112,11 +139,30 @@
     color:#fff;
 }
 
+.progressContainer {
+    width: 30%;
+    margin-bottom: 20px; /* Adds space between the progress bar and other elements */
+}
+
+.progressBar {
+    width: 100%;
+    height: 8px;
+    appearance: none;
+    border-radius: 10px;
+    border:1px solid #E5E7EB;
+    color: #4F46E5;
+    background-color: red;
+}
+
 
 @media (max-width: 768px) {
     .innerContainer {
         width: 80%;
         border: none;
+    }
+    .progressContainer {
+        width: 80%;
+        /* Adds space between the progress bar and other elements */
     }
 }
 
