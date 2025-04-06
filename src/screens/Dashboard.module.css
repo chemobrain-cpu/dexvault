@@ -12,6 +12,7 @@
 
 .dashboard .leftSection {
     width: 20%;
+
 }
 
 .dashboard .leftSection,
@@ -19,7 +20,6 @@
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 255, 255);
-    
 
 }
 
@@ -30,15 +30,11 @@
 .sidebarTitle {
     font-weight: 900;
     color: #3498db;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     padding-left: 10px;
+    margin-top: 5px;
 
 }
-
-
-
-
-
 
 .nav {
     display: flex;
@@ -52,7 +48,7 @@
     margin-bottom: 5px;
     display: flex;
     align-items: center;
-    width:200px;
+    width: 200px;
     border-radius: 30px;
     justify-content: flex-start;
     box-sizing: border-box;
@@ -67,7 +63,7 @@
 }
 
 
-.navItem:hover{
+.navItem:hover {
     background-color: #f5f5f5;
     color: #3498db;
 
@@ -76,15 +72,253 @@
 
 
 .navItem p {
-   margin-left: 10px;
+    margin-left: 10px;
 }
 
 
 
 .dashboard .mainSection {
-    width: 50%;
+    width: 80%;
+    margin-left: 5px;
+    background-color: transparent;
+    padding: 0px;
 }
 
-.dashboard .rightSection {
-    width: 25%;
+
+
+.headerContainer {
+    background-color: rgb(255, 255, 255);
+    height: 53px;
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+
+.title {
+    font-family: 'ABeeZee', sans-serif;
+    font-weight: bolder;
+    width: 50%
+}
+
+.title h2 {
+    margin-top: 0px;
+}
+
+.buttonContainer {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.buysellbutton,
+.sendrecievebutton {
+    width: 130px;
+    border-radius: 30px;
+    background-color: #4F46E5;
+    color: #fff;
+    padding: 5px;
+    height: 45px;
+    font-size: 14px;
+}
+
+.sendrecievebutton {
+    background-color: #f6f6f6;
+    color: black;
+
+}
+
+.notificationbutton,
+.imagebutton {
+    border-radius: 45px;
+    width: 45px;
+    height: 45px;
+    background-color: #f6f6f6;
+    position: relative;
+}
+
+.notificationbutton span {
+    color: rgb(85, 42, 165);
+    position: absolute;
+    top: 4px;
+    right: 5px;
+}
+
+
+.mobileHeader {
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    display: none;
+}
+
+.hamburger,
+.bell {
+    cursor: pointer;
+}
+
+
+
+/* styling the balance section */
+
+.balanceSection {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.balanceCard {
+    background-color: #4F46E5;
+    width: 100%;
+    border-radius: 20px;
+    position: relative; /* Required for positioning the light reflection */
+    overflow: hidden; /* Hide the part of the light reflection that is outside the card */
+}
+
+.balanceCard::before {
+    content: ''; /* Empty content for the pseudo-element */
+    position: absolute;
+    top: 0;
+    left: -100%; /* Start off-screen to the left */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3)); /* Gradient that will simulate light */
+    animation: lightReflection 5s infinite linear; /* Animation runs for 10s in a loop */
+}
+
+/* Keyframes to move the light reflection from left to right and allow a wait time */
+@keyframes lightReflection {
+    0% {
+        left: -100%; /* Start completely off-screen to the left */
+    }
+    40% {
+        left: 100%; /* Move completely off-screen to the right */
+    }
+    60% {
+        left: 100%; /* Stay on the right side for a while (the pause phase) */
+    }
+    100% {
+        left: -100%; /* Return off-screen to the left again */
+    }
+}
+
+.balanceCard .amount{
+    text-align: center;
+    width:100%;
+    font-size: 35px;
+    color:#fff;
+    font-family: 'ABeeZee', sans-serif;
+    margin-bottom: 10px;
+}
+
+
+.balanceCard .amounttext{
+    margin-top: 0px;
+    width: 100%;
+    text-align: center;
+    color:#fff;
+    font-family: 'ABeeZee', sans-serif;
+}
+
+
+.balanceActionContainer{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.balanceActionContainer button{
+    width:60px;
+    height:60px;
+    border-radius: 40px;
+}
+
+
+
+
+@media (max-width: 850px) {
+    .navItem p {
+        display: none;
+    }
+
+    .navItem {
+        padding: 12px;
+        display: flex;
+        width: 100px;
+        font-size: 20px;
+    }
+
+    .dashboard .leftSection {
+        width: 18%;
+    }
+
+    .dashboard .mainSection {
+        width: 82%;
+    }
+
+    .title {
+        width: 30%
+    }
+
+    .buttonContainer {
+        width: 70%
+    }
+
+
+}
+
+@media (max-width: 700px) {
+
+
+    .title {
+        width: 20%
+    }
+
+    .buttonContainer {
+        width: 80%
+    }
+
+
+}
+
+@media (max-width: 600px) {
+
+    .title {
+        display: none;
+    }
+
+    .buttonContainer {
+        display: none;
+    }
+
+    .dashboard .leftSection {
+        display: none;
+    }
+
+    .dashboard .mainSection {
+        width: 100%;
+    }
+
+    .headerContainer {
+        background: transparent;
+        padding: 0px;
+    }
+
+    .mobileHeader {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .dashboard .mainSection {
+        margin-left: 0px;
+    }
+
+
+
+
+
 }
