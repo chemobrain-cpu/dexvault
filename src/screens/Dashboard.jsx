@@ -1,22 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Dashboard.module.css';
-import { FaHome, FaWallet, FaChartLine, FaCog, FaBell, FaUser } from 'react-icons/fa'; // Updated icon import
-import { HiMenu } from 'react-icons/hi'; // Import the HiMenu icon for the mobile menu
+import { FaHome, FaWallet, FaChartLine, FaCog, FaBell, FaUser } from 'react-icons/fa';
+import { HiMenu } from 'react-icons/hi'; // Mobile menu icon
 import { FaShoppingCart, FaTag } from 'react-icons/fa'; // Icons for buy, sell, send, and receive
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'; // Buy icon
 import { MdGetApp } from 'react-icons/md'; // Receive icon
-import {  FaPaperPlane } from 'react-icons/fa'; // Sell and Send icons
+import { FaPaperPlane } from 'react-icons/fa'; // Sell and Send icons
+import axios from 'axios'; // Import Axios for API requests
+import Token from '../components/Token';
+import HomeLoader from "../Modal/HomeLoader"
 
 
 const Dashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [cryptoData, setCryptoData] = useState([]); // State to store crypto data
+    const [loading, setLoading] = useState(true);
+    const [activeTab, setActiveTab] = useState('tab1'); // State for switchable tabs
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
 
+    // Fetch crypto data from CoinGecko API
+    useEffect(() => {
+        const fetchCryptoData = async () => {
+            try {
+                const response = await axios.get(
+                    'https://api.coingecko.com/api/v3/coins/markets', {
+                        params: {
+                            vs_currency: 'usd', // Convert prices to USD
+                            ids: 'bitcoin,ethereum,ripple,litecoin,cardano', // List of coin ids to fetch
+                        }
+                    }
+                );
+                setCryptoData(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching crypto data:', error);
+                setLoading(false);
+            }
+        };
+        fetchCryptoData();
+    }, []);
+
     return (
+        <>
         <div className={styles.dashboard}>
             <div className={styles.leftSection}>
                 <div className={styles.sidebarContent}>
@@ -87,15 +116,50 @@ const Dashboard = () => {
                                 <FaPaperPlane size={18} /> Send
                             </button>
                             <button>
-                             <MdGetApp size={18} /> Receive 
+                                <MdGetApp size={18} /> Receive
                             </button>
                         </div>
                     </div>
                 </div>
+
+                {/* Switchable Tabs */}
+                <div className={styles.tabsContainer}>
+                    <div className={styles.tabs}>
+                        <button
+                            className={activeTab === 'tab1' ? styles.activeTab : ''}
+                            onClick={() => setActiveTab('tab1')}
+                        >
+                            Token
+                        </button>
+                        <button
+                            className={activeTab === 'tab2' ? styles.activeTab : ''}
+                            onClick={() => setActiveTab('tab2')}
+                        >
+                            Market Trends
+                        </button>
+                    </div>
+
+                    {/* Tab Content */}
+                    <div className={styles.tabContent}>
+                        {activeTab === 'tab1' && (
+                            <Token  data={cryptoData}/>
+                        )}
+                        {activeTab === 'tab2' && (
+                            <div className={styles.tab2Content}>
+                                <h3>Tab 2 Content</h3>
+                                <p>This is the content for Tab 2.</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
+        </>
+        
     );
 };
 
 export default Dashboard;
+
+
 

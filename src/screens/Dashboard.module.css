@@ -80,7 +80,7 @@
 .dashboard .mainSection {
     width: 80%;
     margin-left: 5px;
-    background-color: transparent;
+    background-color: white;
     padding: 0px;
 }
 
@@ -259,7 +259,43 @@
 
 
 
+/* styling the crypto section  */
 
+/* Style the entire crypto section */
+.cryptoSection {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff; /* Light background for the section */
+    border-radius: 10px;/* Light shadow for the section */
+}
+
+
+
+.tabsContainer{
+    padding: 15px;
+}
+
+.tabs{
+    display: flex;
+    width: 100%;
+}
+.tabs button{
+    width:50%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    font-family: 'ABeeZee';
+    font-weight: 900;
+    font-size:16px
+}
+
+.activeTab{
+    border-bottom: 2px solid #4F46E5;
+}
+
+.tabContent{
+}
 
 
 @media (max-width: 850px) {
