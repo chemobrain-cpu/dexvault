@@ -18,6 +18,8 @@
     padding: 15px;
     border-radius: 15px;
     font-family: 'ABeeZee';
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
   
@@ -155,10 +157,71 @@
 }
 
 
+/* wallet screen*/
+title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.walletButton {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.importButton {
+    background-color: #f1f1f1;
+    color:rgb(23, 23, 23);
+    font-family: 'ABeeZee', sans-serif;
+}
+
+.createButton {
+    background-color: #3498db;
+    color: white;
+    font-family: 'ABeeZee', sans-serif;
+}
+
+.walletButton:hover {
+    opacity: 0.9;
+}
+
+.walletButton:active {
+    transform: scale(0.98);
+}
+
+
+.securityMessage {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #999;
+    font-style: italic;
+}
+
+
 @media (max-width: 768px) {
     .innerContainer {
         width: 80%;
         border: none;
+         box-shadow: none;
     }
     .progressContainer {
         width: 80%;

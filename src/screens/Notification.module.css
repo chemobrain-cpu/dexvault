@@ -6,10 +6,10 @@
   width: 100vw;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 0px;
-
 }
+
+
 
 .innerContainer {
   display: flex;
@@ -21,6 +21,7 @@
   padding: 15px;
   border-radius: 15px;
   font-family: 'ABeeZee';
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
   .title {
@@ -76,6 +77,7 @@
   .innerContainer {
       width: 80%;
       border: none;
+      box-shadow: none;
   }
   .progressContainer {
       width: 80%;

@@ -14,6 +14,7 @@ const  Password = React.lazy(() => import('./screens/Password'))
 const  CreateWallet = React.lazy(() => import('./screens/CreateWallet'))
 const  ImportWallet = React.lazy(() => import('./screens/ImportWallet'))
 const  Wallet = React.lazy(() => import('./screens/Wallet'))
+const  Dashboard = React.lazy(() => import('./screens/Dashboard'))
 
 function App() {
   let { userToken} = useSelector(state => state.userAuth)
@@ -33,6 +34,7 @@ function App() {
           <Route path='/wallet' element={<Wallet />} />
           <Route path='/create-wallet' element={<CreateWallet />} />
           <Route path='/import-wallet' element={<ImportWallet/>} />
+          <Route path='/dashboard' element={<Dashboard/>} />
           {
             /* homescreen */
           }

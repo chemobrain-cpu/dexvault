@@ -8,28 +8,48 @@ import Spinner from "react-activity/dist/Spinner"
 import "react-activity/dist/Spinner.css";
 
 const WalletScreen = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleImportWallet = () => {
+        navigate('/import-wallet');
+    };
+
+    const handleCreateWallet = () => {
+        navigate('/create-wallet');
+    };
 
     return (
-        <>
-            <div className={styles.container}>
-                <div className={styles.innerContainer}>
+        <div className={styles.container}>
+            <div className={styles.innerContainer}>
+                <h2 className={styles.title}>Import or Create</h2>
+                <p className={styles.description}>
+                    Choose a method to either log in to your existing wallet or create a new one.
+                </p>
+                
+                <div className={styles.buttonContainer}>
+                    
 
-                    <h2 className={styles.title}>Log in or Create</h2>
-                    <p className={styles.description}>Choose the method to create an account or log in to Dexvault.</p>
                     <button
-                        className={styles.importbutton}>
-                        Import Wallet
+                        className={`${styles.walletButton} ${styles.createButton}`}
+                        onClick={handleCreateWallet}
+                    >
+                        <span className={styles.buttonText}>Create Wallet</span>
                     </button>
 
                     <button
-                        className={styles.createbutton}>
+                        className={`${styles.walletButton} ${styles.importButton}`}
+                        onClick={handleImportWallet}
+                    >
+                        <span className={styles.buttonText}>Import Wallet</span>
+                    </button>
+                </div>
 
-                        Create Wallet
-                       </button>
-
+                <div className={styles.securityMessage}>
+                    <p>Your private keys are securely stored and never shared.</p>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   
 }
 
@@ -181,6 +182,7 @@
     .innerContainer {
         width: 80%;
         border: none;
+        box-shadow: none;
     }
     .progressContainer {
         width: 80%;
