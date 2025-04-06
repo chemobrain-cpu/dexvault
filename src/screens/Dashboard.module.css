@@ -174,9 +174,10 @@
 .balanceCard {
     background-color: #4F46E5;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 30px;
     position: relative; /* Required for positioning the light reflection */
     overflow: hidden; /* Hide the part of the light reflection that is outside the card */
+    padding-bottom: 20px;
 }
 
 .balanceCard::before {
@@ -231,11 +232,32 @@
     width: 100%;
 }
 
-.balanceActionContainer button{
-    width:60px;
-    height:60px;
-    border-radius: 40px;
+.balanceActionContainer button {
+    width: 55px; /* You can adjust this size */
+    height: 55px; /* Ensures the height is the same as the width for a perfect circle */
+    border-radius: 50%; /* Make it rounded */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the icon inside the button */
+    align-items: center; /* Center the icon inside the button */
+    padding: 2px; /* No extra padding needed, since we're defining the width and height */
+    background-color: #393bc1; /* Example background color for the buttons */
+    border: none; /* Removes any border */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    color: #fff; /* Text color */
+    font-family: 'ABeeZee', sans-serif; /* Font style */
+    
+    /* Box-shadow for the button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Horizontal offset, Vertical offset, Blur radius, Spread radius, and Color */
 }
+
+.balanceActionContainer button:hover {
+    background-color: #6D63F1; /* Lighter background color on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+}
+
+
+
 
 
 
