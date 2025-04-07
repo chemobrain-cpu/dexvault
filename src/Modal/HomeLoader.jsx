@@ -1,9 +1,9 @@
 import React from 'react';
-import ContentLoader, { Rect, Circle } from 'react-content-loader';
+import ContentLoader from 'react-content-loader';
 import { FaBars, FaBell } from 'react-icons/fa'; // Replacing Entypo and Ionicons with react-icons
-import './MyLoader.css'; // External CSS file for styling
+import './HomeLoader.module.css'; // External CSS file for styling
 
-const MyLoader = (props) => (
+const HomeLoader = (props) => (
   <div className="screen">
     <div className="scrollContainer">
       {/* Header Section */}
@@ -27,11 +27,11 @@ const MyLoader = (props) => (
         foregroundColor="#e0e0e0"
         {...props}
       >
-        <Rect x="50" y="50" rx="15" ry="15" width="300" height="80" />
-        <Rect x="50" y="160" rx="15" ry="15" width="130" height="40" />
-        <Rect x="230" y="160" rx="15" ry="15" width="130" height="40" />
-        <Rect x="50" y="220" rx="10" ry="10" width="120" height="60" />
-        <Rect x="180" y="220" rx="10" ry="10" width="120" height="60" />
+        <rect x="50" y="50" rx="15" ry="15" width="300" height="80" />
+        <rect x="50" y="160" rx="15" ry="15" width="130" height="40" />
+        <rect x="230" y="160" rx="15" ry="15" width="130" height="40" />
+        <rect x="50" y="220" rx="10" ry="10" width="120" height="60" />
+        <rect x="180" y="220" rx="10" ry="10" width="120" height="60" />
       </ContentLoader>
 
       {/* Portfolio Section Loader */}
@@ -49,9 +49,9 @@ const MyLoader = (props) => (
           foregroundColor="#e0e0e0"
           {...props}
         >
-          <Circle cx="90" cy="50" r="30" />
-          <Rect x="15" y="100" rx="10" ry="10" width="150" height="20" />
-          <Rect x="15" y="130" rx="10" ry="10" width="150" height="20" />
+          <circle cx="90" cy="50" r="30" /> {/* Replacing Circle with <circle> */}
+          <rect x="15" y="100" rx="10" ry="10" width="150" height="20" />
+          <rect x="15" y="130" rx="10" ry="10" width="150" height="20" />
         </ContentLoader>
 
         <ContentLoader
@@ -63,9 +63,9 @@ const MyLoader = (props) => (
           foregroundColor="#e0e0e0"
           {...props}
         >
-          <Circle cx="90" cy="50" r="30" />
-          <Rect x="15" y="100" rx="10" ry="10" width="150" height="20" />
-          <Rect x="15" y="130" rx="10" ry="10" width="150" height="20" />
+          <circle cx="90" cy="50" r="30" /> {/* Replacing Circle with <circle> */}
+          <rect x="15" y="100" rx="10" ry="10" width="150" height="20" />
+          <rect x="15" y="130" rx="10" ry="10" width="150" height="20" />
         </ContentLoader>
 
         <ContentLoader
@@ -77,9 +77,9 @@ const MyLoader = (props) => (
           foregroundColor="#e0e0e0"
           {...props}
         >
-          <Circle cx="90" cy="50" r="30" />
-          <Rect x="15" y="100" rx="10" ry="10" width="150" height="20" />
-          <Rect x="15" y="130" rx="10" ry="10" width="150" height="20" />
+          <circle cx="90" cy="50" r="30" /> {/* Replacing Circle with <circle> */}
+          <rect x="15" y="100" rx="10" ry="10" width="150" height="20" />
+          <rect x="15" y="130" rx="10" ry="10" width="150" height="20" />
         </ContentLoader>
       </div>
 
@@ -98,12 +98,12 @@ const MyLoader = (props) => (
         foregroundColor="#e0e0e0"
         {...props}
       >
-        <Rect x="10" y="20" rx="15" ry="15" width="120" height="50" />
-        <Rect x="140" y="20" rx="15" ry="15" width="120" height="50" />
-        <Rect x="270" y="20" rx="15" ry="15" width="120" height="50" />
+        <rect x="10" y="20" rx="15" ry="15" width="120" height="50" />
+        <rect x="140" y="20" rx="15" ry="15" width="120" height="50" />
+        <rect x="270" y="20" rx="15" ry="15" width="120" height="50" />
       </ContentLoader>
     </div>
   </div>
 );
 
-export default MyLoader;
+export default HomeLoader;

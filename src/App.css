@@ -30,3 +30,9 @@ button:focus {
   transform: scale(1.05); /* Example effect */
   box-shadow: 0 0 0 3px rgba(100, 150, 255, 0.5); /* Optional visual cue */
 }
+
+
+
+p,div,h1,h2.h3,h4,h5,h6,button,span{
+  font-family: 'ABeeZee';
+}

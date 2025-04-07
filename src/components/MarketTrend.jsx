@@ -1,7 +1,7 @@
 import styles from './Token.module.css';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, Tooltip, ResponsiveContainer } from 'recharts';
 
-const Token = ({ data }) => {
+const MarketTrend = ({ data }) => {
     return (
         <div className={styles.container}>
             {data.map(token => {
@@ -23,32 +23,14 @@ const Token = ({ data }) => {
                                     {token.id.slice(0, 8).charAt(0).toUpperCase() + token.id.slice(1, 8)}
                                 </p>
 
-
-                                <p className={styles.cryptocardPrice}> ${token.current_price.toFixed(2)}</p>
-
                             </div>
 
                         </div>
 
-                        <div className={styles.cryptocardChange}>
-                            <ResponsiveContainer width={100} height={50}>
-                                <LineChart data={chartData}>
-                                    <Line
-                                        type="monotone"
-                                        dataKey="change"
-                                        stroke={token.price_change_percentage_24h >= 0 ? 'green' : 'red'}
-                                        strokeWidth={2}
-                                        dot={false}
-                                    />
-                                    <Tooltip />
-                                </LineChart>
-                            </ResponsiveContainer>
-                        </div>
-
                         <div className={styles.cryptocardRight}>
-                            <p className={styles.cryptocardAmount} style={{ color: token.price_change_percentage_24h.toFixed(2) >= 0 ? 'green' : 'red' }}>
+                            <p className={styles.cryptocardAmount} >
 
-                                {token.price_change_percentage_24h.toFixed(2)}
+                                <p className={styles.cryptocardPrice}> ${token.current_price.toFixed(2)}</p>
                             </p>
 
                         </div>
@@ -59,5 +41,4 @@ const Token = ({ data }) => {
     );
 };
 
-export default Token;
-
+export default MarketTrend;

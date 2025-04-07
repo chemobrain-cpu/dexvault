@@ -1,4 +1,74 @@
 .container{
-    background-color: red;
+margin-top: 10px;
+
+}
+.cryptocard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(255, 255, 255);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.cryptocard:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    background: linear-gradient(135deg, #f7fbff, #f7ffff);
+}
+
+.cryptocardLeft{
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+ 
+}
+.cryptocardImage{
+    width:40px;
+    height:40px;
+    border-radius: 40px;
+}
+.cryptocardNameCon{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+}
+
+.cryptocardName{
+    margin-bottom: 2px;
+    text-align: start;
+    font-weight: 900;
     
+}
+.cryptocardPrice{
+    margin-top: 0px;
+    margin-left: 7px;
+}
+.cryptocardRight{
+    display:flex;
+    justify-content: end;
+}
+
+.cryptocardRight{
+    width:20%;
+}
+.cryptocardLeft{
+    width:60%;
+
+}
+
+.cryptocardName{
+    margin-left: 10px;
+    font-family: 'ABeeZee';
+    font-weight: bolder;
+}
+
+.cryptocardAmount{
+    font-family: 'ABeeZee';
+    font-weight: bold;
+
 }

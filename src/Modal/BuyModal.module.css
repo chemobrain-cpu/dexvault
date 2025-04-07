@@ -29,8 +29,7 @@
   }
   
   .modalButtonContainer {
-    display: flex;
-    justify-content: center;
+   
   }
   
   .acceptBtn {
@@ -44,10 +43,15 @@
     border: none;
     cursor: pointer;
     transition: background 0.3s;
+    margin-bottom: 10px;
   }
   
   .acceptBtn:hover {
     background-color: #3b3cc4;
   }
-  
-  
+
+  @media (max-width: 600px) {
+    .modalBackground{
+        display: none;
+    }
+}
