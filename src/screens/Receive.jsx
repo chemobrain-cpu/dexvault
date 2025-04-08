@@ -40,8 +40,6 @@ const transactions = [
 ];
 
 
-
-
 const ReceiveAsset = () => {
     const [cryptoData, setCryptoData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -129,7 +127,7 @@ const ReceiveAsset = () => {
 
     return (
         <>
-            {loading && <HomeLoader />}
+          
             {openBuyModal && <BuyModal buyFun={buyFunction} sellFun={sellFunction} />}
             {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
             <div className={styles.dashboard}>
@@ -218,15 +216,25 @@ const ReceiveAsset = () => {
                                 </div>
 
 
-                                <div className={styles.addressBox}>
-                                    <span className={styles.walletAddress}>1MQsPqeUFvoU...</span>
-                                    <button className={styles.copyButton} onClick={() => {
-                                        navigator.clipboard.writeText("1MQsPqeUFvoU...");
-                                        alert("Address copied to clipboard!");
-                                    }}>
-                                        copy
-                                    </button>
+                                <div className={styles.addressSection}>
+                                    <p className={styles.copyInstruction}>Tap the button to copy your wallet address</p>
+
+                                    <div className={styles.addressBox}>
+                                        <span className={styles.walletAddress}>1MQsPqeUFvoU...</span>
+                                        <button
+                                            className={styles.copyButton}
+                                            onClick={() => {
+                                                navigator.clipboard.writeText("1MQsPqeUFvoU...");
+                                                alert("Address copied to clipboard!");
+                                            }}
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className={styles.copyIcon} viewBox="0 0 16 16">
+                                                <path d="M10 1.5A1.5 1.5 0 0 1 11.5 3v10A1.5 1.5 0 0 1 10 14.5H4A1.5 1.5 0 0 1 2.5 13V3A1.5 1.5 0 0 1 4 1.5h6zm-6 1A.5.5 0 0 0 3.5 3v10a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H4zm8 2a.5.5 0 0 1 1 0v9A2.5 2.5 0 0 1 10.5 15H5a.5.5 0 0 1 0-1h5.5a1.5 1.5 0 0 0 1.5-1.5v-9z" />
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
+
                             </div>
 
 

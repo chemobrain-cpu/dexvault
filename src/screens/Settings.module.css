@@ -333,7 +333,7 @@
     padding: 12px 15px;
     font-size: 16px;
     border-radius: 30px;
-    border: 1px solid #f1f1f1;
+    border: 1px solid #f8f9fa;
     outline: none;
     background-color: #f6f6f6;
 }
@@ -341,10 +341,12 @@
 
 .settingsSection {
     padding:10px;
+    padding-top: 5px;
     background: white;
     border-radius: 16px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     max-width: 600px;
+    margin-bottom: 0px;
  
 }
 
@@ -363,12 +365,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:20px;
-    border-bottom: 1px solid #eee;
+    padding:15px;
     font-size: 0.95rem;
     color: #444;
     transition: background 0.3s ease;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background-color: #f8f8f8;
+ 
 }
+
+.icon {
+    margin-right: 12px;
+    color: #9a9a9a;
+    transition: transform 0.3s ease;
+  }
+  
+  .settingsItem:hover .icon {
+    transform: scale(1.1);
+  }
+  
 
 .settingsItem:hover {
     background-color: #f9f9f9;

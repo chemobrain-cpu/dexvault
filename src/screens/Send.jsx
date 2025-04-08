@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link,  useNavigate } from 'react-router-dom';
-import styles from './SendAsset.module.css';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from './Send.module.css';
 import { FaHome, FaWallet, FaChartLine, FaCog, FaBell, FaUser } from 'react-icons/fa';
 import axios from 'axios'; // Import Axios for API requests
 import HomeLoader from "../Modal/HomeLoader.jsx";
@@ -9,9 +9,7 @@ import BuyModal from '../Modal/BuyModal';
 import { HiArrowLeft } from 'react-icons/hi';
 import Transaction from '../components/Transaction';
 import 'react-activity/dist/library.css'; // 👈 important
-import { Spinner } from 'react-activity';
-
-
+import { QRCodeSVG } from "qrcode.react";
 
 
 const transactions = [
@@ -42,9 +40,7 @@ const transactions = [
 ];
 
 
-
-
-const SellAsset = () => {
+const Send= () => {
     const [cryptoData, setCryptoData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openBuyModal, setOpenBuyModal] = useState(false);
@@ -54,10 +50,7 @@ const SellAsset = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     // Filtered crypto list
-    const filteredCrypto = cryptoData.filter((coin) =>
-        coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+
 
 
 
@@ -127,20 +120,14 @@ const SellAsset = () => {
     }
 
     const navigateHandler = () => {
-       // alert('hello')
-      navigate(-1)
-    }
-
-
-
-    const sendHandler = () => {
-        navigate('/send-assets')
+        // alert('hello')
+        navigate(-1)
     }
 
 
     return (
         <>
-            
+         
             {openBuyModal && <BuyModal buyFun={buyFunction} sellFun={sellFunction} />}
             {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
             <div className={styles.dashboard}>
@@ -179,7 +166,7 @@ const SellAsset = () => {
 
                             </div>
 
-                            <h2>Sell asset</h2>
+                            <h2>Send Asset</h2>
                         </div>
 
                         <div className={styles.title}>
@@ -210,59 +197,14 @@ const SellAsset = () => {
 
 
                         <div className={styles.dashboardContentleft}>
-                            <div className={styles.searchContainer}>
-                                <input
-                                    type="text"
-                                    placeholder="Search asset..."
-                                    className={styles.searchInput}
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                />
-                            </div>
-
-                            <div className={styles.cryptoList}>
-
-                                {!loading ? (
-                                    filteredCrypto && filteredCrypto.map((coin) => (
-                                        <div key={coin.id} className={styles.cryptoItem}>
-                                            <div className={styles.coinInfo}>
-                                                <img src={coin.image} alt={coin.name} className={styles.coinImage} />
-                                                <div>
-                                                    <div className={styles.coinName}>{coin.name}</div>
-                                                    <div className={styles.coinSymbol}>{coin.symbol.toUpperCase()}</div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                className={styles.coinPrice}
-                                                style={{
-                                                    color: coin.price_change_percentage_24h >= 0 ? 'green' : 'red'
-                                                }}
-                                            >
-                                                ${coin.current_price.toLocaleString()}
-                                            </div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <div style={{
-                                        width: '100%',
-                                        height: '150px',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        paddingBottom: '20px'
-                                    }}>
-                                        <Spinner size={24} color="#4F46E5" speed={0.5} animating={true} />
-                                    </div>
-                                )}
-
-
-                            </div>
+                            {/* The code goes here */}
+                            <p>sending crypto</p>
                         </div>
 
 
                         <div className={styles.dashboardContentright}>
-                          
-                            <Transaction transactions={transactions}/>
+
+                            <Transaction transactions={transactions} />
 
 
 
@@ -281,4 +223,4 @@ const SellAsset = () => {
     );
 };
 
-export default SellAsset;
+export default Send;

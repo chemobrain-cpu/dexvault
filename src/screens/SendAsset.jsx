@@ -131,16 +131,19 @@ const SendAsset = () => {
     }
 
 
+    const sendHandler = ()=>{
 
-
-    const sendHandler = () => {
-        navigate('/send-assets')
+        navigate('/send')
     }
+
+
+
+ 
 
 
     return (
         <>
-            {loading && <HomeLoader />}
+         
             {openBuyModal && <BuyModal buyFun={buyFunction} sellFun={sellFunction} />}
             {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
             <div className={styles.dashboard}>
@@ -179,7 +182,7 @@ const SendAsset = () => {
 
                             </div>
 
-                            <h2>Send asset</h2>
+                            <h2>Select asset</h2>
                         </div>
 
                         <div className={styles.title}>
@@ -222,9 +225,9 @@ const SendAsset = () => {
 
                             <div className={styles.cryptoList}>
 
-                                {loading ? (
+                                 {!loading?(
                                     filteredCrypto && filteredCrypto.map((coin) => (
-                                        <div key={coin.id} className={styles.cryptoItem}>
+                                        <div onClick={sendHandler} key={coin.id} className={styles.cryptoItem}>
                                             <div className={styles.coinInfo}>
                                                 <img src={coin.image} alt={coin.name} className={styles.coinImage} />
                                                 <div>

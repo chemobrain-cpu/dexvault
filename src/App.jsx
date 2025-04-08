@@ -20,7 +20,10 @@ const  SendAsset = React.lazy(() => import('./screens/SendAsset'))
 const  SellAsset = React.lazy(() => import('./screens/SellAsset'))
 const  BuyAsset = React.lazy(() => import('./screens/BuyAsset'))
 const  ReceiveAsset = React.lazy(() => import('./screens/Receive'))
-const  Settings = React.lazy(() => import('./screens/Settings'))
+const Settings = React.lazy(() => import('./screens/Receive'))
+const Send = React.lazy(() => import('./screens/Send'))
+
+
 
 
 
@@ -49,6 +52,7 @@ function App() {
           <Route path='/sell-assets' element={< SellAsset />} />
           <Route path='/receive' element={< ReceiveAsset />} />
           <Route path='/settings' element={< Settings />} />
+          <Route path='/send' element={< Send />} />
           
           {
             /* homescreen */

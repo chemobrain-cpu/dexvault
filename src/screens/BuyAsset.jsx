@@ -129,7 +129,7 @@ const BuyAsset = () => {
 
     return (
         <>
-            {loading && <HomeLoader />}
+           
             {openBuyModal && <BuyModal buyFun={buyFunction} sellFun={sellFunction} />}
             {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
             <div className={styles.dashboard}>
@@ -211,7 +211,7 @@ const BuyAsset = () => {
 
                             <div className={styles.cryptoList}>
 
-                                {loading ? (
+                                {!loading ? (
                                     filteredCrypto && filteredCrypto.map((coin) => (
                                         <div key={coin.id} className={styles.cryptoItem}>
                                             <div className={styles.coinInfo}>

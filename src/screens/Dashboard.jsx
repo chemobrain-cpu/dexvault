@@ -65,16 +65,12 @@ const transactions = [
 const Dashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [cryptoData, setCryptoData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('tab1');
     const [openBuyModal, setOpenBuyModal] = useState(false);
     const [openSendModal, setOpenSendModal] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const navigate = useNavigate()
-
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
 
     // Fetch crypto data from CoinGecko API
     useEffect(() => {
@@ -83,7 +79,7 @@ const Dashboard = () => {
 
                 return
             }
-            
+
             try {
                 const response = await axios.get(
                     'https://api.coingecko.com/api/v3/coins/markets', {
@@ -102,10 +98,11 @@ const Dashboard = () => {
                 );
 
                 setCryptoData(response.data);
+                console.log(response.data);
                 setLoading(false);
 
             } catch (error) {
-                console.error('Error fetching crypto data:', error);
+                console.log('Error fetching crypto data:', error);
                 setLoading(false);
             }
         };
@@ -153,7 +150,7 @@ const Dashboard = () => {
 
     const actionHandler = (data) => {
         if (data === 'receive') {
-            return alert('receiving')
+            return navigate('/receive')
         }
 
         navigate(`/${data}`)
@@ -272,40 +269,40 @@ const Dashboard = () => {
 
                                 {/* Tab Content */}
                                 <div className={styles.tabContent}>
-  {activeTab === 'tab1' && (
-    loading ? (
-        <div style={{
-            width: '100%',
-            height: '150px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingBottom:'20px'
-          }}>
-            <Spinner size={24} color="#4F46E5" speed={0.5} animating={true} />
-          </div>
-    ) : (
-       <Token data={cryptoData} />
-    )
-  )}
-  
-  {activeTab === 'tab2' && (
-    loading ? (
-        <div style={{
-            width: '100%',
-            height: '150px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingBottom:'20px'
-          }}>
-            <Spinner size={24} color="#4F46E5" speed={0.5} animating={true} />
-          </div>
-    ) : (
-      <MarketTrend data={cryptoData} />
-    )
-  )}
-</div>
+                                    {activeTab === 'tab1' && (
+                                        loading ? (
+                                            <div style={{
+                                                width: '100%',
+                                                height: '150px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                paddingBottom: '20px'
+                                            }}>
+                                                <Spinner size={24} color="#4F46E5" speed={0.5} animating={true} />
+                                            </div>
+                                        ) : (
+                                            <Token data={cryptoData} />
+                                        )
+                                    )}
+
+                                    {activeTab === 'tab2' && (
+                                        loading ? (
+                                            <div style={{
+                                                width: '100%',
+                                                height: '150px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                paddingBottom: '20px'
+                                            }}>
+                                                <Spinner size={24} color="#4F46E5" speed={0.5} animating={true} />
+                                            </div>
+                                        ) : (
+                                            <MarketTrend data={cryptoData} />
+                                        )
+                                    )}
+                                </div>
 
 
                             </div>
@@ -345,10 +342,36 @@ const Dashboard = () => {
                                 {/* desktoptab content*/}
                                 <div className={styles.desktoptabContent}>
                                     {activeTab === 'tab1' && (
-                                        <Token data={cryptoData} />
+                                        loading ? (
+                                            <div style={{
+                                                width: '100%',
+                                                height: '150px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                paddingBottom: '20px'
+                                            }}>
+                                                <Spinner size={24} color="#4F46E5" speed={0.5} animating={true} />
+                                            </div>
+                                        ) : (
+                                            <Token data={cryptoData} />
+                                        )
                                     )}
                                     {activeTab === 'tab2' && (
-                                        <MarketTrend data={cryptoData} />
+                                        loading ? (
+                                            <div style={{
+                                                width: '100%',
+                                                height: '150px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                paddingBottom: '20px'
+                                            }}>
+                                                <Spinner size={24} color="#4F46E5" speed={0.5} animating={true} />
+                                            </div>
+                                        ) : (
+                                            <MarketTrend data={cryptoData} />
+                                        )
                                     )}
                                 </div>
 
