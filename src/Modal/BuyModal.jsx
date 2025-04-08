@@ -13,7 +13,7 @@ const BuyModal = ({ sellFun,buyFun }) => {
             sell
           </button>
           <button className={styles.acceptBtn} onClick={buyFun}>
-            recieve
+            receive
           </button>
         </div>
       </div>

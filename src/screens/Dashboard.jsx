@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.css';
 import { FaHome, FaWallet, FaChartLine, FaCog, FaBell, FaUser } from 'react-icons/fa';
 import { HiMenu } from 'react-icons/hi'; // Mobile menu icon
-import { FaShoppingCart, FaTag } from 'react-icons/fa'; // Icons for buy, sell, send, and receive
-import { RiMoneyDollarCircleLine } from 'react-icons/ri'; // Buy icon
-import { MdGetApp } from 'react-icons/md'; // Receive icon
 import { FaPaperPlane } from 'react-icons/fa'; // Sell and Send icons
 import axios from 'axios'; // Import Axios for API requests
 import Token from '../components/Token';
 import MarketTrend from '../components/MarketTrend';
-import HomeLoader from "../Modal/HomeLoader.jsx";
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import { FaArrowDown, FaArrowUp, FaExchangeAlt } from 'react-icons/fa';
 import BuyModal from '../Modal/BuyModal';
 import Sidebar from '../components/SideBar';
+import BottomTabs from '../components/BottomTabs';
 //import styles from '../../components/Sidebar.module.css';
+import { MdArrowDownward } from 'react-icons/md';
+import { FaPlus, FaMinus } from 'react-icons/fa';
+import Transaction from '../components/Transaction';
+
+import 'react-activity/dist/library.css'; // 👈 important
+import { Spinner } from 'react-activity';
+
+
+
+
 
 const data = [
     { name: 'Bitcoin', value: 40 },
@@ -58,11 +65,12 @@ const transactions = [
 const Dashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [cryptoData, setCryptoData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('tab1');
     const [openBuyModal, setOpenBuyModal] = useState(false);
     const [openSendModal, setOpenSendModal] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const navigate = useNavigate()
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -75,6 +83,7 @@ const Dashboard = () => {
 
                 return
             }
+            
             try {
                 const response = await axios.get(
                     'https://api.coingecko.com/api/v3/coins/markets', {
@@ -85,7 +94,7 @@ const Dashboard = () => {
                     params: {
                         vs_currency: 'usd', // Convert prices to USD
                         order: 'market_cap_desc', // Optional: order by market cap
-                        per_page: 50, // Fetch 50 coins
+                        per_page: 20, // Fetch 50 coins
                         page: 1 // First page
                     }
                 }
@@ -128,21 +137,40 @@ const Dashboard = () => {
         setOpenSendModal(false)
     }
 
-    const recieveFunction = () => {
+    const receiveFunction = () => {
         setOpenSendModal(false)
     }
 
 
     const openMobileMenu = () => {
-        setSidebarOpen(true)
+        setSidebarOpen(prev => !prev)
     }
+
+    const sendHandler = () => {
+        navigate('/send-assets')
+    }
+
+
+    const actionHandler = (data) => {
+        if (data === 'receive') {
+            return alert('receiving')
+        }
+
+        navigate(`/${data}`)
+    }
+
+
+
+
+
+
+
 
 
     return (
         <>
-            {loading && <HomeLoader />}
             {openBuyModal && <BuyModal buyFun={buyFunction} sellFun={sellFunction} />}
-            {openSendModal && <SendModal sendFun={sendFunction} recieveFun={recieveFunction} />}
+            {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
             <div className={styles.dashboard}>
                 <div className={styles.leftSection}>
                     <div className={styles.sidebarContent}>
@@ -169,20 +197,13 @@ const Dashboard = () => {
 
                 {/*  sidebar content */}
                 {sidebarOpen && (
-                    <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)}>
-                        {/* Customize sidebar content here */}
-                        <ul>
-                            <li>🏠 Home</li>
-                            <li>👤 Profile</li>
-                            <li>⚙️ Settings</li>
-                        </ul>
-                    </Sidebar>
+                    <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
                 )}
 
                 <div className={styles.mainSection}>
                     <div className={styles.headerContainer}>
                         <div className={styles.mobileHeader}>
-                            <HiMenu color='black' size={30} className={styles.hamburger} onClick={openMobileMenu} />
+                            <HiMenu color={sidebarOpen ? 'white' : 'black'} size={30} className={styles.hamburger} onClick={openMobileMenu} />
                             <FaBell color='black' size={30} className={styles.bell} onClick={openMobileMenu} />
                         </div>
 
@@ -194,8 +215,8 @@ const Dashboard = () => {
                             <button className={styles.buysellbutton} onClick={openBuyModalFun}>
                                 Buy & Sell
                             </button>
-                            <button className={styles.sendrecievebutton} onClick={openSendModalFun}>
-                                Send & Recieve
+                            <button className={styles.sendreceivebutton} onClick={openSendModalFun}>
+                                Send & receive
                             </button>
 
                             <button className={styles.notificationbutton}>
@@ -217,17 +238,17 @@ const Dashboard = () => {
                                     <p className={styles.amounttext}>Your wallet balance</p>
 
                                     <div className={styles.balanceActionContainer}>
-                                        <button>
-                                            <RiMoneyDollarCircleLine size={18} /> Buy
+                                        <button onClick={() => actionHandler('buy-assets')}>
+                                            <FaPlus size={18} /> Buy
                                         </button>
-                                        <button>
-                                            <FaTag size={18} /> Sell
+                                        <button onClick={() => actionHandler('sell-assets')}>
+                                            <FaMinus size={18} /> Sell
                                         </button>
-                                        <button>
-                                            <FaPaperPlane size={18} /> Send
+                                        <button onClick={() => actionHandler('send-assets')}>
+                                            <FaPaperPlane size={18} onClick={sendHandler} /> Send
                                         </button>
-                                        <button>
-                                            <MdGetApp size={18} /> Receive
+                                        <button onClick={() => actionHandler('receive')}>
+                                            <MdArrowDownward size={18} /> Receive
                                         </button>
                                     </div>
                                 </div>
@@ -251,13 +272,42 @@ const Dashboard = () => {
 
                                 {/* Tab Content */}
                                 <div className={styles.tabContent}>
-                                    {activeTab === 'tab1' && (
-                                        <Token data={cryptoData} />
-                                    )}
-                                    {activeTab === 'tab2' && (
-                                        <MarketTrend data={cryptoData} />
-                                    )}
-                                </div>
+  {activeTab === 'tab1' && (
+    loading ? (
+        <div style={{
+            width: '100%',
+            height: '150px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingBottom:'20px'
+          }}>
+            <Spinner size={24} color="#4F46E5" speed={0.5} animating={true} />
+          </div>
+    ) : (
+       <Token data={cryptoData} />
+    )
+  )}
+  
+  {activeTab === 'tab2' && (
+    loading ? (
+        <div style={{
+            width: '100%',
+            height: '150px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingBottom:'20px'
+          }}>
+            <Spinner size={24} color="#4F46E5" speed={0.5} animating={true} />
+          </div>
+    ) : (
+      <MarketTrend data={cryptoData} />
+    )
+  )}
+</div>
+
+
                             </div>
 
                         </div>
@@ -306,7 +356,7 @@ const Dashboard = () => {
                             <div className={styles.desktopMainSectionright}>
 
                                 <div className={styles.rightPanel}>
-                                    {/* Portfolio Breakdown with PieChart */}
+
                                     <div className={styles.card}>
                                         <h3 className={styles.heading}>Portfolio Breakdown</h3>
                                         <ResponsiveContainer width="100%" height={200}>
@@ -330,33 +380,7 @@ const Dashboard = () => {
                                         </ResponsiveContainer>
                                     </div>
 
-                                    {/* Recent Transactions Redesigned */}
-                                    <div className={styles.card}>
-                                        <h3 className={styles.heading}>Recent Transactions</h3>
-                                        <div className={styles.transactionsList}>
-                                            {transactions.map(tx => (
-                                                <div key={tx.id} className={styles.transactionItem}>
-                                                    <div className={styles.icon}>{tx.icon}</div>
-                                                    <div className={styles.details}>
-                                                        <div className={styles.txType}>
-                                                            {tx.type} <span className={styles.asset}>{tx.asset}</span>
-                                                        </div>
-                                                        <div className={styles.date}>{tx.date}</div>
-                                                    </div>
-                                                    <div
-                                                        className={`${styles.amount} ${tx.amount.startsWith('+')
-                                                            ? styles.green
-                                                            : tx.amount.startsWith('-')
-                                                                ? styles.red
-                                                                : ''
-                                                            }`}
-                                                    >
-                                                        {tx.amount}
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
+                                    <Transaction transactions={transactions} />
                                 </div>
                             </div>
 
@@ -372,6 +396,8 @@ const Dashboard = () => {
 
                 </div>
             </div>
+
+            <BottomTabs />
         </>
 
     );
