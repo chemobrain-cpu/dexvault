@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './Receive.module.css';
-import { FaHome, FaWallet, FaChartLine, FaCog, FaBell, FaUser } from 'react-icons/fa';
-import axios from 'axios'; // Import Axios for API requests
-import HomeLoader from "../Modal/HomeLoader.jsx";
-import { FaArrowDown, FaArrowUp, FaExchangeAlt } from 'react-icons/fa';
+import { FaArrowDown, FaArrowUp, FaExchangeAlt, FaBell, FaUser } from 'react-icons/fa';
+import axios from 'axios';
 import BuyModal from '../Modal/BuyModal';
-import { HiArrowLeft } from 'react-icons/hi';
+import SendModal from '../Modal/SendModal';
 import Transaction from '../components/Transaction';
-import 'react-activity/dist/library.css'; // 👈 important
 import { QRCodeSVG } from "qrcode.react";
 import DesktopSideBar from '../components/DesktopSideBar';
-
+import BackHeader from '../components/BackHeader'; // ✅ Imported BackHeader
 
 const transactions = [
     {
@@ -40,49 +37,28 @@ const transactions = [
     }
 ];
 
-
 const ReceiveAsset = () => {
     const [cryptoData, setCryptoData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openBuyModal, setOpenBuyModal] = useState(false);
     const [openSendModal, setOpenSendModal] = useState(false);
 
-    const navigate = useNavigate()
-    const [searchTerm, setSearchTerm] = useState("");
+    const navigate = useNavigate();
 
-    // Filtered crypto list
-
-
-
-
-
-    // Fetch crypto data from CoinGecko API
     useEffect(() => {
         const fetchCryptoData = async () => {
-            if (loading) {
-
-                return
-            }
+            if (loading) return;
             try {
-                const response = await axios.get(
-                    'https://api.coingecko.com/api/v3/coins/markets', {
-                    /*params: {
-                        vs_currency: 'usd', // Convert prices to USD
-                        ids: 'bitcoin,ethereum,ripple,litecoin,cardano', // List of coin ids to fetch
-                    }*/
+                const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
                     params: {
-                        vs_currency: 'usd', // Convert prices to USD
-                        order: 'market_cap_desc', // Optional: order by market cap
-                        per_page: 20, // Fetch 50 coins
-                        page: 1 // First page
+                        vs_currency: 'usd',
+                        order: 'market_cap_desc',
+                        per_page: 20,
+                        page: 1
                     }
-                }
-
-                );
-
+                });
                 setCryptoData(response.data);
                 setLoading(false);
-
             } catch (error) {
                 console.error('Error fetching crypto data:', error);
                 setLoading(false);
@@ -91,95 +67,33 @@ const ReceiveAsset = () => {
         fetchCryptoData();
     }, []);
 
-
-    const openBuyModalFun = () => {
-        setOpenBuyModal(true)
-    }
-
-    const openSendModalFun = () => {
-        setOpenSendModal(true)
-    }
-
-    const buyFunction = () => {
-        setOpenBuyModal(false)
-
-
-    }
-    const sellFunction = () => {
-        setOpenBuyModal(false)
-
-
-    }
-
-
-    const sendFunction = () => {
-        setOpenSendModal(false)
-    }
-
-    const receiveFunction = () => {
-        setOpenSendModal(false)
-    }
-
-    const navigateHandler = () => {
-        // alert('hello')
-        navigate(-1)
-    }
-
+    const openBuyModalFun = () => setOpenBuyModal(true);
+    const openSendModalFun = () => setOpenSendModal(true);
+    const buyFunction = () => setOpenBuyModal(false);
+    const sellFunction = () => setOpenBuyModal(false);
+    const sendFunction = () => setOpenSendModal(false);
+    const receiveFunction = () => setOpenSendModal(false);
+    const navigateHandler = () => navigate(-1);
 
     return (
         <>
-          
             {openBuyModal && <BuyModal buyFun={buyFunction} sellFun={sellFunction} />}
             {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
             <div className={styles.dashboard}>
                 <div className={styles.leftSection}>
-                    <DesktopSideBar/>
+                    <DesktopSideBar />
                 </div>
 
                 <div className={styles.mainSection}>
-                    <div className={styles.headerContainer}>
-                        <div className={styles.mobileHeader}>
-                            <div className={styles.hamburger}>
-                                <HiArrowLeft
-                                    color={'black'}
-                                    size={25}
-                                    onClick={navigateHandler} // Or replace with your go back logic
-                                />
-
-                            </div>
-
-                            <h2>Receive</h2>
-                        </div>
-
-                        <div className={styles.title}>
-                            <h2></h2>
-                        </div>
-
-                        <div className={styles.buttonContainer}>
-                            <button className={styles.buysellbutton} onClick={openBuyModalFun}>
-                                Buy & Sell
-                            </button>
-                            <button className={styles.sendreceivebutton} onClick={openSendModalFun}>
-                                Send & receive
-                            </button>
-
-                            <button className={styles.notificationbutton}>
-                                <FaBell color='black' size={18} />
-                                <span>55</span>
-                            </button>
-
-                            <button className={styles.imagebutton}>
-                                <FaUser color='black' size={18} />
-                            </button>
-                        </div>
-                    </div>
+                    {/* ✅ Replaced header with BackHeader */}
+                    <BackHeader
+                        navigateHandler={navigateHandler}
+                        openBuyModalFun={openBuyModalFun}
+                        openSendModalFun={openSendModalFun}
+                    />
 
                     <div className={styles.dashboardContent}>
-
-
-
                         <div className={styles.dashboardContentleft}>
-                            {/* The code goes here */}
                             <div className={styles.receiveContainer}>
                                 <div className={styles.receiveHeader}>
                                     <div>
@@ -187,16 +101,12 @@ const ReceiveAsset = () => {
                                             <option>staked-ether</option>
                                             <option>staked-ether</option>
                                         </select>
-
                                     </div>
                                 </div>
-
-
 
                                 <div className={styles.qrWrapper}>
                                     <QRCodeSVG value="https://example.com" size={128} className={styles.qrImage} />
                                 </div>
-
 
                                 <div className={styles.addressSection}>
                                     <p className={styles.copyInstruction}>Tap the button to copy your wallet address</p>
@@ -216,32 +126,19 @@ const ReceiveAsset = () => {
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
-
-
                         </div>
-
 
                         <div className={styles.dashboardContentright}>
-
                             <Transaction transactions={transactions} />
-
-
-
                         </div>
-
-
-
                     </div>
-
-
                 </div>
             </div>
-
         </>
-
     );
 };
 
 export default ReceiveAsset;
+
+

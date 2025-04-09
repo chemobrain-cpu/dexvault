@@ -10,13 +10,13 @@ const SendModal = ({ modalVisible,sendFun,receiveFun }) => {
 
 
 
-  const navigateSell = ()=>{
-    navigate('/sell-assets')
+  const navigateSend = ()=>{
+    navigate('/seend-assets')
   }
 
 
   const navigateReceive = ()=>{
-    navigate('/buy-assets')
+    navigate('/receive')
 
   }
   return (
@@ -24,7 +24,7 @@ const SendModal = ({ modalVisible,sendFun,receiveFun }) => {
       <div className={styles.modalView}>
         <p className={styles.modalState}>Send and receive crypto on dexvault</p>
         <div className={styles.modalButtonContainer}>
-          <button className={styles.acceptBtn}  onClick={navigateSell}>
+          <button className={styles.acceptBtn}  onClick={navigateSend}>
             send
           </button>
           <button className={styles.acceptBtn} onClick={navigateReceive}>

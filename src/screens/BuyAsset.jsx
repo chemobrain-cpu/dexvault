@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styles from './SendAsset.module.css';
 import { FaHome, FaWallet, FaChartLine, FaCog, FaBell, FaUser } from 'react-icons/fa';
-import axios from 'axios'; // Import Axios for API requests
+import axios from 'axios';
 import HomeLoader from "../Modal/HomeLoader.jsx";
 import { FaArrowDown, FaArrowUp, FaExchangeAlt } from 'react-icons/fa';
 import BuyModal from '../Modal/BuyModal';
+import SendModal from '../Modal/SendModal'; // ✅ Newly added import
 import { HiArrowLeft } from 'react-icons/hi';
 import Transaction from '../components/Transaction';
-import 'react-activity/dist/library.css'; // 👈 important
+import 'react-activity/dist/library.css';
 import { Spinner } from 'react-activity';
 import DesktopSideBar from '../components/DesktopSideBar';
-
 
 const transactions = [
     {
@@ -40,54 +40,36 @@ const transactions = [
     }
 ];
 
-
-
-
 const BuyAsset = () => {
     const [cryptoData, setCryptoData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openBuyModal, setOpenBuyModal] = useState(false);
     const [openSendModal, setOpenSendModal] = useState(false);
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState("");
 
-    // Filtered crypto list
     const filteredCrypto = cryptoData.filter((coin) =>
         coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-
-
-
-    // Fetch crypto data from CoinGecko API
     useEffect(() => {
         const fetchCryptoData = async () => {
-            if (loading) {
-
-                return
-            }
+            if (loading) return;
             try {
                 const response = await axios.get(
-                    'https://api.coingecko.com/api/v3/coins/markets', {
-                    /*params: {
-                        vs_currency: 'usd', // Convert prices to USD
-                        ids: 'bitcoin,ethereum,ripple,litecoin,cardano', // List of coin ids to fetch
-                    }*/
-                    params: {
-                        vs_currency: 'usd', // Convert prices to USD
-                        order: 'market_cap_desc', // Optional: order by market cap
-                        per_page: 20, // Fetch 50 coins
-                        page: 1 // First page
+                    'https://api.coingecko.com/api/v3/coins/markets',
+                    {
+                        params: {
+                            vs_currency: 'usd',
+                            order: 'market_cap_desc',
+                            per_page: 20,
+                            page: 1
+                        }
                     }
-                }
-
                 );
-
                 setCryptoData(response.data);
                 setLoading(false);
-
             } catch (error) {
                 console.error('Error fetching crypto data:', error);
                 setLoading(false);
@@ -96,47 +78,23 @@ const BuyAsset = () => {
         fetchCryptoData();
     }, []);
 
+    const openBuyModalFun = () => setOpenBuyModal(true);
+    const openSendModalFun = () => setOpenSendModal(true);
 
-    const openBuyModalFun = () => {
-        setOpenBuyModal(true)
-    }
-
-    const openSendModalFun = () => {
-        setOpenSendModal(true)
-    }
-
-    const buyFunction = () => {
-        setOpenBuyModal(false)
-
-
-    }
-    const sellFunction = () => {
-        setOpenBuyModal(false)
-    }
-
-
-    const sendFunction = () => {
-        setOpenSendModal(false)
-    }
-
-    const receiveFunction = () => {
-        setOpenSendModal(false)
-    }
-
-    const navigateHandler = () => {
-        navigate(-1)
-    }
-
+    const buyFunction = () => setOpenBuyModal(false);
+    const sellFunction = () => setOpenBuyModal(false);
+    const sendFunction = () => setOpenSendModal(false);
+    const receiveFunction = () => setOpenSendModal(false);
+    const navigateHandler = () => navigate(-1);
 
     return (
         <>
-           
             {openBuyModal && <BuyModal buyFun={buyFunction} sellFun={sellFunction} />}
             {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
+
             <div className={styles.dashboard}>
                 <div className={styles.leftSection}>
-
-                    <DesktopSideBar/>
+                    <DesktopSideBar />
                 </div>
 
                 <div className={styles.mainSection}>
@@ -146,11 +104,9 @@ const BuyAsset = () => {
                                 <HiArrowLeft
                                     color={'black'}
                                     size={25}
-                                    onClick={navigateHandler} // Or replace with your go back logic
+                                    onClick={navigateHandler}
                                 />
-
                             </div>
-
                             <h2>Buy asset</h2>
                         </div>
 
@@ -165,12 +121,10 @@ const BuyAsset = () => {
                             <button className={styles.sendreceivebutton} onClick={openSendModalFun}>
                                 Send & Receive
                             </button>
-
                             <button className={styles.notificationbutton}>
                                 <FaBell color='black' size={18} />
                                 <span>55</span>
                             </button>
-
                             <button className={styles.imagebutton}>
                                 <FaUser color='black' size={18} />
                             </button>
@@ -178,9 +132,6 @@ const BuyAsset = () => {
                     </div>
 
                     <div className={styles.dashboardContent}>
-
-
-
                         <div className={styles.dashboardContentleft}>
                             <div className={styles.searchContainer}>
                                 <input
@@ -193,9 +144,8 @@ const BuyAsset = () => {
                             </div>
 
                             <div className={styles.cryptoList}>
-
                                 {!loading ? (
-                                    filteredCrypto && filteredCrypto.map((coin) => (
+                                    filteredCrypto.map((coin) => (
                                         <div key={coin.id} className={styles.cryptoItem}>
                                             <div className={styles.coinInfo}>
                                                 <img src={coin.image} alt={coin.name} className={styles.coinImage} />
@@ -226,30 +176,16 @@ const BuyAsset = () => {
                                         <Spinner size={24} color="#4F46E5" speed={0.5} animating={true} />
                                     </div>
                                 )}
-
-
                             </div>
                         </div>
 
-
                         <div className={styles.dashboardContentright}>
-
                             <Transaction transactions={transactions} />
-
-
-
                         </div>
-
-
-
                     </div>
-
-
                 </div>
             </div>
-
         </>
-
     );
 };
 

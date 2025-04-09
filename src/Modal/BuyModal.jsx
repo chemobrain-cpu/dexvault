@@ -17,7 +17,6 @@ const BuyModal = ({ sellFun,buyFun }) => {
 
   const navigateBuy = ()=>{
     navigate('/buy-assets')
-
   }
 
 
