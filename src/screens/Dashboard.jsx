@@ -20,7 +20,7 @@ import Transaction from '../components/Transaction';
 import 'react-activity/dist/library.css'; // 👈 important
 import { Spinner } from 'react-activity';
 import DesktopSideBar from '../components/DesktopSideBar';
-import DesktopHeader from '../components/DesktopHeader'
+import DesktopHeader from '../components/DashboardHeader'
 
 
 
@@ -172,7 +172,7 @@ const Dashboard = () => {
 
             <div className={styles.dashboard}>
                 <div className={styles.leftSection}>
-                    <DesktopSideBar/>
+                    <DesktopSideBar />
                 </div>
 
                 {/*  sidebar content */}
@@ -181,7 +181,14 @@ const Dashboard = () => {
                 )}
 
                 <div className={styles.mainSection}>
-                    <DesktopHeader/>
+                    <DesktopHeader
+                        openMobileMenu={openMobileMenu}
+                        notificationHandler={notificationHandler}
+                        openBuyModalFun={openBuyModalFun}
+                        openSendModalFun={openSendModalFun}
+                        sidebarOpen={sidebarOpen}
+                    />
+
 
                     <div className={styles.dashboardContent}>
                         <div className={styles.mobileMainSection}>
@@ -365,8 +372,6 @@ const Dashboard = () => {
 
 
                         </div>
-
-
 
 
 

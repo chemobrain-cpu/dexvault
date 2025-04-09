@@ -54,6 +54,7 @@ const Profile = () => {
                 </div>
 
                 <div className={styles.mainSection}>
+
                     <div className={styles.headerContainer}>
                         <div className={styles.mobileHeader}>
                             <div className={styles.hamburger}>
@@ -114,10 +115,6 @@ const Profile = () => {
                                     <button className={styles.editProfileBtn}>Edit Profile</button>
                                 </div>
                             </div>
-
-
-
-
 
                         </div>
                         <div className={styles.dashboardContentright}>
