@@ -20,6 +20,7 @@ import Transaction from '../components/Transaction';
 import 'react-activity/dist/library.css'; // 👈 important
 import { Spinner } from 'react-activity';
 import DesktopSideBar from '../components/DesktopSideBar';
+import DesktopHeader from '../components/DesktopHeader'
 
 
 
@@ -180,34 +181,7 @@ const Dashboard = () => {
                 )}
 
                 <div className={styles.mainSection}>
-                    <div className={styles.headerContainer}>
-                        <div className={styles.mobileHeader}>
-                            <HiMenu color={sidebarOpen ? 'white' : 'black'} size={25} className={styles.hamburger} onClick={openMobileMenu} />
-                            <FaBell color='black' size={25} className={styles.bell} onClick={notificationHandler} />
-                        </div>
-
-                        <div className={styles.title}>
-                            <h2>Home</h2>
-                        </div>
-
-                        <div className={styles.buttonContainer}>
-                            <button className={styles.buysellbutton} onClick={openBuyModalFun}>
-                                Buy & Sell
-                            </button>
-                            <button className={styles.sendreceivebutton} onClick={openSendModalFun}>
-                                Send & receive
-                            </button>
-
-                            <button className={styles.notificationbutton}>
-                                <FaBell color='black' size={18} />
-                                <span>55</span>
-                            </button>
-
-                            <button className={styles.imagebutton}>
-                                <FaUser color='black' size={18} />
-                            </button>
-                        </div>
-                    </div>
+                    <DesktopHeader/>
 
                     <div className={styles.dashboardContent}>
                         <div className={styles.mobileMainSection}>

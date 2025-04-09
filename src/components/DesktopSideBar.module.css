@@ -1,67 +1,121 @@
 .sidebarContent {
     display: flex;
     flex-direction: column;
-    background-color: rgb(255, 255, 255);
-
-}
-
-.sidebarContent {
+    background-color: #ffffff;
+    height: 100vh;
+    padding: 0px 0;
     font-family: 'ABeeZee', sans-serif;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
 }
 
 .sidebarTitle {
-    font-weight: 900;
+    font-weight: bold;
     color: #3498db;
+    padding-left: 20px;
+    font-size: 24px;
     margin-bottom: 40px;
-    padding-left: 10px;
-    margin-top: 5px;
-
 }
 
 .nav {
     display: flex;
     flex-direction: column;
     padding-left: 10px;
+    gap: 8px;
 }
 
 .navItem {
-    font-weight: 900;
-    color: rgb(107, 107, 107);
-    margin-bottom: 5px;
     display: flex;
     align-items: center;
+    gap: 14px;
     width: 200px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
     border-radius: 30px;
-    justify-content: flex-start;
+    color: #444;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background-color: transparent;
     box-sizing: border-box;
-    padding-left: 40px;
-    font-size: 17px;
-    transition: background-color 0.6s ease, color 0.6s ease;
-}
-
-.navItem:nth-of-type(2) {
-    background-color: #f6f6f6;
-    color: #3498db;
 }
 
 .navItem:hover {
-    background-color: #f5f5f5;
+    background-color: #f0f4f8;
     color: #3498db;
-
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.08);
 }
 
 .navItem p {
-    margin-left: 10px;
+    margin: 0;
+}
+
+.navItem svg {
+    font-size: 18px;
+}
+
+.navItem.active {
+    background-color: #eaf6fc;
+    color: #3498db;
+    font-weight: 600;
+}
+
+.navItem.active svg {
+    color: #3498db;
 }
 
 @media (max-width: 850px) {
     .navItem p {
         display: none;
     }
+
     .navItem {
-        padding: 12px;
-        display: flex;
         width: 100px;
+        justify-content: center;
+        padding: 12px;
         font-size: 20px;
     }
 }
+
+
+
+
+
+
+
+
+@media (max-width: 850px) {
+    .navItem p {
+        display: none;
+    }
+
+    .navItem {
+        width: 100px;
+        justify-content: center;
+        padding: 12px;
+        font-size: 20px;
+    }
+}
+@media (max-width: 850px) {
+    .title {
+        display: none;
+    }
+    
+    .buttonContainer {
+        display: none;
+    }
+    
+    .mobileHeader {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+
+
+}
+
+
+
+
+    
