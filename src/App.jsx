@@ -1,12 +1,11 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect,useState } from "react";
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import FallBackComponent from './components/Fallback';
 
-import { useSelector } from 'react-redux';
-import ProtectedRoute from './components/ProtectedRoute'; // 🔐 Import
+import { useSelector, useDispatch } from 'react-redux';
+import ProtectedRoute from './components/ProtectedRoute';
 
-// Import all pages
 import Splash from './screens/Splash';
 import Splash2 from './screens/Splash2';
 import Login from './screens/Login';
@@ -28,13 +27,27 @@ import Settings from './screens/Settings';
 import Send from './screens/Send';
 import Profile from './screens/Profile';
 import NotificationPage from './screens/NotificationPage';
+
 import { checkIfIsLoggedIn } from "./store/action/appStorage";
 
 
 function App() {
+  const dispatch = useDispatch();
+  const [isLoading,setIsLoading] = useState(true)
 
-  checkIfIsLoggedIn()
 
+
+  useEffect(() => {
+    let apiCall = async()=>{ 
+       let res  = await dispatch(checkIfIsLoggedIn());
+       setIsLoading(false)
+    }
+    apiCall()
+  }, [dispatch]); // run once on mount
+
+if(isLoading){
+  return <FallBackComponent />
+}
 
   return (
     <div className="App">
@@ -54,78 +67,15 @@ function App() {
           <Route path='/import-wallet' element={<ImportWallet />} />
 
           {/* Protected Routes */}
-          <Route
-            path='/dashboard'
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/send-assets'
-            element={
-              <ProtectedRoute>
-                <SendAsset />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/buy-assets'
-            element={
-              <ProtectedRoute>
-                <BuyAsset />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/sell-assets'
-            element={
-              <ProtectedRoute>
-                <SellAsset />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/receive'
-            element={
-              <ProtectedRoute>
-                <ReceiveAsset />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/settings'
-            element={
-              <ProtectedRoute>
-                <Settings />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/send'
-            element={
-              <ProtectedRoute>
-                <Send />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/profile'
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/notifications'
-            element={
-              <ProtectedRoute>
-                <NotificationPage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path='/send-assets' element={<ProtectedRoute><SendAsset /></ProtectedRoute>} />
+          <Route path='/buy-assets' element={<ProtectedRoute><BuyAsset /></ProtectedRoute>} />
+          <Route path='/sell-assets' element={<ProtectedRoute><SellAsset /></ProtectedRoute>} />
+          <Route path='/receive' element={<ProtectedRoute><ReceiveAsset /></ProtectedRoute>} />
+          <Route path='/settings' element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path='/send' element={<ProtectedRoute><Send /></ProtectedRoute>} />
+          <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path='/notifications' element={<ProtectedRoute><NotificationPage /></ProtectedRoute>} />
         </Routes>
       </Suspense>
     </div>
@@ -133,4 +83,5 @@ function App() {
 }
 
 export default App;
+
 

@@ -5,37 +5,47 @@ export const LOGIN = 'LOGIN';
 export const CHANGE_BLACK = 'CHANGE_BLACK';
 export const CHANGE_WHITE = 'CHANGE_WHITE';
 
-// Replacing AsyncStorage with localStorage
 
-// Utility function for calculating if token expires
-let calculateRemainingTime = (expiryDate) => {
+// Calculates how much time (in ms) is left until the expiry timestamp
+let calculateRemainingTime = (hoursUntilExpiry) => {
   const currentTime = new Date().getTime();
-  const adjustExpirationTime = expiryDate * 60 * 60 * 1000;
-  const timeLeft = adjustExpirationTime - currentTime;
-  return timeLeft;
+  const expirationTime = currentTime + hoursUntilExpiry * 60 * 60 * 1000; // Convert hours to milliseconds
+  const timeLeft = expirationTime - currentTime; // Time left in milliseconds
+  return Math.max(timeLeft, 0); // Ensure non-negative result
 };
 
-let retrievedStoredToken = async () => {
-  let tokenFromStorage = localStorage.getItem('token');
-  let expiryDate = localStorage.getItem('tokenExpiry');
+// Function to retrieve admin token and check its validity
+let retrievedAdminStoredToken = () => {
+  const tokenFromStorage = localStorage.getItem('token');
+  const expiryDate = localStorage.getItem('expiry'); // This should be a timestamp
 
-  const timeLeft = calculateRemainingTime(Number(expiryDate));
-  if (timeLeft <= 3600) {
+
+  if (!expiryDate) {
+    return {
+      token: "",
+      expiresIn: ""
+    };
+  }
+
+  const timeLeft = calculateRemainingTime(Number(expiryDate)); // Ensure expiryDate is a number
+
+  if (timeLeft <= 1000) {
+    // Less than or equal to 1 hour
     localStorage.removeItem('token');
-    localStorage.removeItem('tokenExpiry');
-    localStorage.removeItem('userId');
+    localStorage.removeItem('expiry');
+    localStorage.removeItem('user');
 
     return {
       token: "",
-      expiresIn: "",
+      expiresIn: ""
     };
   }
 
   return {
     token: tokenFromStorage,
-    expiresIn: timeLeft,
+    expiresIn: timeLeft
   };
-};
+}
 
 export const checkIfIsLoggedIn = () => {
   return async (dispatch, getState) => {
@@ -74,7 +84,7 @@ export const checkIfIsLoggedIn = () => {
 
     try {
       let response;
-      let { token, expiresIn } = await retrievedStoredToken();
+      let { token, expiresIn } = await retrievedAdminStoredToken ();
 
       if (!token) {
         return {
@@ -84,7 +94,7 @@ export const checkIfIsLoggedIn = () => {
       }
 
       expiresIn = expiresIn / (60 * 60 * 1000);
-      localStorage.setItem('tokenExpiry', `${expiresIn}`);
+      localStorage.setItem('expiry', `${expiresIn}`);
       localStorage.setItem('token', token);
       let userId = localStorage.getItem('userId');
 
@@ -104,10 +114,12 @@ export const checkIfIsLoggedIn = () => {
       });
 
       if (response.status === 200) {
+        
         let data = await response.json();
         let res = {
           user: data.response.user,
           token: token,
+          expiresIn:expiresIn
         };
 
         localStorage.setItem('userId', data.response.user._id);
@@ -119,6 +131,7 @@ export const checkIfIsLoggedIn = () => {
       }
 
       if (response.status === 300) {
+      
         let data = await response.json();
         return {
           bool: false,
@@ -126,6 +139,7 @@ export const checkIfIsLoggedIn = () => {
         };
       }
       if (response.status === 404) {
+       
         let data = await response.json();
         return {
           bool: false,
@@ -263,7 +277,7 @@ export const verifyEmail = (data) => {
       if (response.status === 200) {
         let data = await response.json()
         //dispatching the LOGIN action
-        localStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
+        localStorage.setItem('expiry', `${data.response.expiresIn}`);
         localStorage.setItem('token', data.response.token);
         localStorage.setItem('userId', data.response.user._id);
 
@@ -310,7 +324,7 @@ export const createPasscode = (data) => {
         let data = await response.json()
 
 
-        localStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
+        localStorage.setItem('expiry', `${data.response.expiresIn}`);
         localStorage.setItem('token', data.response.token);
         localStorage.setItem('userId', data.response.user._id);
 
@@ -377,7 +391,7 @@ export const checkPasscode = (data) => {
         let data = await response.json()
         console.log(data)
         //dispatching the LOGIN action
-        localStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
+        localStorage.setItem('expiry', `${data.response.expiresIn}`);
         localStorage.setItem('token', data.response.token);
         localStorage.setItem('userId', data.response.user._id);
 
