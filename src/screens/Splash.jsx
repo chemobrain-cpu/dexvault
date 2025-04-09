@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './Splash.module.css'; // Assuming you have a separate file for the styles
+import styles from './splash.module.css'; // Assuming you have a separate file for the styles
 import { checkIfIsLoggedIn } from '../store/action/appStorage';
 
 const Splash = () => {
