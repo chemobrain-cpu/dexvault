@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import styles from './NotificationPage.module.css';
-import { FaHome, FaWallet, FaChartLine, FaCog, FaBell, FaUser } from 'react-icons/fa';
 import axios from 'axios';
 import BuyModal from '../Modal/BuyModal';
-import { HiArrowLeft } from 'react-icons/hi';
+import SendModal from '../Modal/SendModal';
 import 'react-activity/dist/library.css';
 import {
     Bitcoin,
     ArrowDownLeft,
     ArrowUpRight,
-    DollarSign,
 } from "lucide-react"
 import DesktopSideBar from '../components/DesktopSideBar';
+import BackHeader from '../components/BackHeader'
+
+
 
 const Notification = () => {
     const [cryptoData, setCryptoData] = useState([]);
@@ -48,36 +49,30 @@ const Notification = () => {
     const openSendModalFun = () => setOpenSendModal(true);
     const buyFunction = () => setOpenBuyModal(false);
     const sellFunction = () => setOpenBuyModal(false);
+    const sendFunction = () => setOpenSendModal(false);
+    const receiveFunction = () => setOpenSendModal(false);
     const navigateHandler = () => navigate(-1);
 
     return (
         <>
             {openBuyModal && <BuyModal buyFun={buyFunction} sellFun={sellFunction} />}
+            
+            {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
             <div className={styles.dashboard}>
                 <div className={styles.leftSection}>
-                    <DesktopSideBar/>
+                    <DesktopSideBar />
                 </div>
 
                 <div className={styles.mainSection}>
-                    <div className={styles.headerContainer}>
-                        <div className={styles.mobileHeader}>
-                            <div className={styles.hamburger}>
-                                <HiArrowLeft color={'black'} size={25} onClick={navigateHandler} />
-                            </div>
-                            <h2>Notifications</h2>
-                        </div>
-                        <div className={styles.title}><h2></h2></div>
-                        <div className={styles.buttonContainer}>
-                            <button className={styles.buysellbutton} onClick={openBuyModalFun}>Buy & Sell</button>
-                            <button className={styles.sendreceivebutton} onClick={openSendModalFun}>Send & receive</button>
-                            <button className={styles.notificationbutton}><FaBell color='black' size={18} /><span>55</span></button>
-                            <button className={styles.imagebutton}><FaUser color='black' size={18} /></button>
-                        </div>
-                    </div>
+                    <BackHeader
+                        navigateHandler={navigateHandler}
+                        openBuyModalFun={openBuyModalFun}
+                        openSendModalFun={openSendModalFun}
+                    />
+
 
                     <div className={styles.dashboardContent}>
                         <div className={styles.dashboardContentleft}>
-
 
                             <div className={styles.notificationContainer}>
                                 <div className={styles.notificationItem}>
