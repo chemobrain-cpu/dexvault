@@ -105,7 +105,7 @@ export const checkIfIsLoggedIn = () => {
         };
       }
 
-      response = await fetch(`http://192.168.43.195:9090/userbytoken`, {
+      response = await fetch(`https://dexvault-backend.onrender.com/userbytoken`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -162,7 +162,7 @@ export const authenticate = (data) => {
   return async (dispatch, getState) => {
     try {
 
-      let response = await fetch('http://192.168.43.195:9090/authenticate', {
+      let response = await fetch('https://dexvault-backend.onrender.com/authenticate', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -235,7 +235,7 @@ export const authenticate = (data) => {
 export const verifyEmail = (data) => {
   return async (dispatch, getState) => {
     try {
-      let response = await fetch('http://192.168.43.195:9090/verifyemail', {
+      let response = await fetch('https://dexvault-backend.onrender.com/verifyemail', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -305,7 +305,7 @@ export const verifyEmail = (data) => {
 export const createPasscode = (data) => {
   return async (dispatch, getState) => {
     try {
-      let response = await fetch('http://192.168.43.195:9090/createpasscode', {
+      let response = await fetch('https://dexvault-backend.onrender.com/createpasscode', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -349,7 +349,7 @@ export const createPasscode = (data) => {
 export const checkPasscode = (data) => {
   return async (dispatch, getState) => {
     try {
-      let response = await fetch('http://192.168.43.195:9090/checkpasscode', {
+      let response = await fetch('https://dexvault-backend.onrender.com/checkpasscode', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
