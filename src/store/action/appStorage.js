@@ -141,6 +141,7 @@ export const checkIfIsLoggedIn = () => {
   };
 };
 
+
 //login handler
 export const authenticate = (data) => {
 
@@ -262,9 +263,9 @@ export const verifyEmail = (data) => {
       if (response.status === 200) {
         let data = await response.json()
         //dispatching the LOGIN action
-        await AsyncStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
-        await AsyncStorage.setItem('token', data.response.token);
-        await AsyncStorage.setItem('userId', data.response.user._id);
+        localStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
+        localStorage.setItem('token', data.response.token);
+        localStorage.setItem('userId', data.response.user._id);
 
         dispatch({ type: LOGIN, payload: data.response })
 
@@ -307,11 +308,11 @@ export const createPasscode = (data) => {
 
       if (response.status === 200) {
         let data = await response.json()
-       
 
-        await AsyncStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
-        await AsyncStorage.setItem('token', data.response.token);
-        await AsyncStorage.setItem('userId', data.response.user._id);
+
+        localStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
+        localStorage.setItem('token', data.response.token);
+        localStorage.setItem('userId', data.response.user._id);
 
         dispatch({ type: LOGIN, payload: data.response })
         //dispatch login 
@@ -373,10 +374,12 @@ export const checkPasscode = (data) => {
       }
 
       if (response.status === 200) {
+        let data = await response.json()
+        console.log(data)
         //dispatching the LOGIN action
-        await AsyncStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
-        await AsyncStorage.setItem('token', data.response.token);
-        await AsyncStorage.setItem('userId', data.response.user._id);
+        localStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
+        localStorage.setItem('token', data.response.token);
+        localStorage.setItem('userId', data.response.user._id);
 
         dispatch({ type: LOGIN, payload: data.response })
         //dispatch login 

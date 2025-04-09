@@ -1,10 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { authenticate } from '../store/action/appStorage';
 import styles from './Login.module.css';
-import AuthModal from '../modal/AuthModal';
-import Spinner from "react-activity/dist/Spinner"
 import "react-activity/dist/Spinner.css";
 
 const WalletScreen = () => {

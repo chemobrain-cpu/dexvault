@@ -28,8 +28,14 @@ import Settings from './screens/Settings';
 import Send from './screens/Send';
 import Profile from './screens/Profile';
 import NotificationPage from './screens/NotificationPage';
+import { checkIfIsLoggedIn } from "./store/action/appStorage";
+
 
 function App() {
+
+  checkIfIsLoggedIn()
+
+
   return (
     <div className="App">
       <Suspense fallback={<FallBackComponent />}>

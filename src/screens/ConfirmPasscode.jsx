@@ -50,7 +50,7 @@ export default function ConfirmPasscodeScreen() {
 
                 if (!res.bool) {
                     setIsAuthError(true)
-                    setAuthInfo('Passcode does not match')
+                    setAuthInfo(res.message)
                     return setIsLoading(false)
                 }
 

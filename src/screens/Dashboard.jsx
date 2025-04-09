@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.css';
-import { FaHome, FaWallet, FaChartLine, FaCog, FaBell, FaUser } from 'react-icons/fa';
-import { HiMenu } from 'react-icons/hi'; // Mobile menu icon
 import { FaPaperPlane } from 'react-icons/fa'; // Sell and Send icons
 import axios from 'axios'; // Import Axios for API requests
 import Token from '../components/Token';
@@ -17,10 +15,11 @@ import { MdArrowDownward } from 'react-icons/md';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Transaction from '../components/Transaction';
 
-import 'react-activity/dist/library.css'; // 👈 important
+import 'react-activity/dist/library.css'; // 
 import { Spinner } from 'react-activity';
 import DesktopSideBar from '../components/DesktopSideBar';
 import DesktopHeader from '../components/DashboardHeader'
+import SendModal from '../Modal/SendModal';
 
 
 
@@ -161,8 +160,6 @@ const Dashboard = () => {
     const notificationHandler = () => {
         navigate('/notifications')
     }
-
-
 
 
     return (

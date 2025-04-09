@@ -7,7 +7,7 @@ function PushNotificationsScreen() {
   const navigate = useNavigate()
 
   const navigateHandler = ()=>{
-    navigate('/dashboard')
+    navigate('/wallet')
 
   }
 

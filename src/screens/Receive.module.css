@@ -31,7 +31,7 @@
 
 .sidebarTitle {
     font-weight: 900;
-    color: #3498db;
+    color: #4F46E5;
     margin-bottom: 40px;
     padding-left: 10px;
     margin-top: 5px;
@@ -61,13 +61,13 @@
 
 .navItem:nth-of-type(2) {
     background-color: #f6f6f6;
-    color: #3498db;
+    color: #4F46E5;
 }
 
 
 .navItem:hover {
     background-color: #f5f5f5;
-    color: #3498db;
+    color: #4F46E5;
 
 }
 

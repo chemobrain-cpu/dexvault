@@ -1,3 +1,4 @@
+import React from 'react'
 import { FaBell, FaUser, FaCog, FaHome, FaSignOutAlt, FaExchangeAlt } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './DesktopSideBar.module.css';

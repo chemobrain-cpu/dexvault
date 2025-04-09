@@ -43,7 +43,8 @@ const VerificationScreen = () => {
         }
 
         setIsLoading(false);
-        navigate('/passcode'); // Navigate to next page
+        navigate('/passcode',{ state: { email } }); // Navigate to next page
+        
     };
 
     return (

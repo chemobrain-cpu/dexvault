@@ -24,6 +24,7 @@ export default function PasscodeScreen() {
             if (newPasscode.length === 4) {
                 navigate('/confirm-passcode', {
                     state: { code: newPasscode,email:email }
+                    
                 });
             }
         }
