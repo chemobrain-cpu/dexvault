@@ -18,6 +18,12 @@ const LoginScreen = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+
+
+    const updateAuthError = ()=>{
+        setIsAuthError(prev => !prev);
+        setAuthInfo('')
+    }
  
 
     const handleEmailChange = (e) => {

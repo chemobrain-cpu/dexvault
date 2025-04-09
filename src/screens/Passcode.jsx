@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faFingerprint, faBackspace } from '@fortawesome/free-solid-svg-icons';
 import styles from './Passcode.module.css';
@@ -11,6 +11,9 @@ export default function PasscodeScreen() {
     const [passcode, setPasscode] = useState("");
     const [isFingerprintEnabled, setIsFingerprintEnabled] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation()
+    const { email } = location.state || {};  // Retrieving the email passed through location state
+
 
     const handleKeyPress = (num) => {
         if (passcode.length < 4) {
@@ -20,7 +23,7 @@ export default function PasscodeScreen() {
             // Check if all 4 digits are entered and navigate to next screen
             if (newPasscode.length === 4) {
                 navigate('/confirm-passcode', {
-                    state: { code: newPasscode }
+                    state: { code: newPasscode,email:email }
                 });
             }
         }

@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Notification.module.css'; // Import CSS module
+import { useNavigate } from 'react-router-dom';
 
 function PushNotificationsScreen() {
   const [scale, setScale] = useState(0);
+  const navigate = useNavigate()
+
+  const navigateHandler = ()=>{
+    navigate('/dashboard')
+
+  }
 
   useEffect(() => {
     // Start the animation for button appearance
@@ -34,7 +41,7 @@ function PushNotificationsScreen() {
         style={{ transform: `scale(${scale})` }} // Applying scale animation
       >
         <button className={styles.buttonContent}>
-          <span className={styles.buttonText}>Allow Notifications</span>
+          <span className={styles.buttonText} onClick={navigateHandler}>Allow Notifications</span>
         </button>
       </div>
     </div>

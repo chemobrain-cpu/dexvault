@@ -2,40 +2,39 @@ import React, { Suspense } from "react";
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import FallBackComponent from './components/Fallback';
-import { useSelector } from "react-redux";
 
-const Splash = React.lazy(() => import('./screens/Splash'))
-const Splash2 = React.lazy(() => import('./screens/Splash2'))
-const Login = React.lazy(() => import('./screens/Login')) 
-const Verification = React.lazy(() => import('./screens/Verification'))    
-const Passcode = React.lazy(() => import('./screens/Passcode')) 
-const ConfirmPasscode = React.lazy(() => import('./screens/ConfirmPasscode'))
-const Notification = React.lazy(() => import('./screens/Notification'))      
-const  Password = React.lazy(() => import('./screens/Password'))  
-const  CreateWallet = React.lazy(() => import('./screens/CreateWallet'))
-const  ImportWallet = React.lazy(() => import('./screens/ImportWallet'))
-const  Wallet = React.lazy(() => import('./screens/Wallet'))
-const  Dashboard = React.lazy(() => import('./screens/Dashboard'))
-const  SendAsset = React.lazy(() => import('./screens/SendAsset'))
-const  SellAsset = React.lazy(() => import('./screens/SellAsset'))
-const  BuyAsset = React.lazy(() => import('./screens/BuyAsset'))
-const  ReceiveAsset = React.lazy(() => import('./screens/Receive'))
-const Settings = React.lazy(() => import('./screens/Settings'))
-const Send = React.lazy(() => import('./screens/Send'))
-const Profile = React.lazy(() => import('./screens/Profile'))
-const NotificationPage = React.lazy(() => import('./screens/NotificationPage'))
+import { useSelector } from 'react-redux';
+import ProtectedRoute from './components/ProtectedRoute'; // 🔐 Import
 
+// Import all pages
+import Splash from './screens/Splash';
+import Splash2 from './screens/Splash2';
+import Login from './screens/Login';
+import Verification from './screens/Verification';
+import Passcode from './screens/Passcode';
+import ConfirmPasscode from './screens/ConfirmPasscode';
+import Notification from './screens/Notification';
+import Password from './screens/Password';
+import Wallet from './screens/Wallet';
+import CreateWallet from './screens/CreateWallet';
+import ImportWallet from './screens/ImportWallet';
 
-
-
+import Dashboard from './screens/Dashboard';
+import SendAsset from './screens/SendAsset';
+import BuyAsset from './screens/BuyAsset';
+import SellAsset from './screens/SellAsset';
+import ReceiveAsset from './screens/Receive';
+import Settings from './screens/Settings';
+import Send from './screens/Send';
+import Profile from './screens/Profile';
+import NotificationPage from './screens/NotificationPage';
 
 function App() {
-  let { userToken} = useSelector(state => state.userAuth)
-
   return (
-    <div className = "App">
-      <Suspense fallback={<FallBackComponent />} >
+    <div className="App">
+      <Suspense fallback={<FallBackComponent />}>
         <Routes>
+          {/* Public Routes */}
           <Route path='/' element={<Splash />} />
           <Route path='/onboarding' element={<Splash2 />} />
           <Route path='/login' element={<Login />} />
@@ -46,20 +45,81 @@ function App() {
           <Route path='/password' element={<Password />} />
           <Route path='/wallet' element={<Wallet />} />
           <Route path='/create-wallet' element={<CreateWallet />} />
-          <Route path='/import-wallet' element={<ImportWallet/>} />
-          <Route path='/dashboard' element={<Dashboard/>} />
-          <Route path='/send-assets' element={< SendAsset />} />
-          <Route path='/buy-assets' element={< BuyAsset />} />
-          <Route path='/sell-assets' element={< SellAsset />} />
-          <Route path='/receive' element={< ReceiveAsset />} />
-          <Route path='/settings' element={< Settings />} />
-          <Route path='/send' element={< Send />} />
-          <Route path='/profile' element={< Profile/>} />
-          <Route path='/notifications' element={< NotificationPage/>} />
-          
-          {
-            /* homescreen */
-          }
+          <Route path='/import-wallet' element={<ImportWallet />} />
+
+          {/* Protected Routes */}
+          <Route
+            path='/dashboard'
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/send-assets'
+            element={
+              <ProtectedRoute>
+                <SendAsset />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/buy-assets'
+            element={
+              <ProtectedRoute>
+                <BuyAsset />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/sell-assets'
+            element={
+              <ProtectedRoute>
+                <SellAsset />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/receive'
+            element={
+              <ProtectedRoute>
+                <ReceiveAsset />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/settings'
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/send'
+            element={
+              <ProtectedRoute>
+                <Send />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/notifications'
+            element={
+              <ProtectedRoute>
+                <NotificationPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Suspense>
     </div>
@@ -67,3 +127,4 @@ function App() {
 }
 
 export default App;
+

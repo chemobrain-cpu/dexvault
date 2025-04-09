@@ -307,8 +307,13 @@ export const createPasscode = (data) => {
 
       if (response.status === 200) {
         let data = await response.json()
-        dispatch({ type: CREATE_PASSCODE, payload: data.response })
+       
 
+        await AsyncStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
+        await AsyncStorage.setItem('token', data.response.token);
+        await AsyncStorage.setItem('userId', data.response.user._id);
+
+        dispatch({ type: LOGIN, payload: data.response })
         //dispatch login 
         return {
           bool: true,
