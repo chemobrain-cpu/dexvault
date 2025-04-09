@@ -7,6 +7,8 @@ import Spinner from "react-activity/dist/Spinner";
 import "react-activity/dist/Spinner.css";
 import styles from './Verification.module.css';
 
+
+
 const VerificationScreen = () => {
     const [code, setCode] = useState('');
     const [isDisabled, setIsDisabled] = useState(true);

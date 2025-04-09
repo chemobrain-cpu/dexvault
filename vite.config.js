@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  base: '/', // 👈 Set this to '/' if deploying at root, or '/your-subfolder/' if under a subpath
   plugins: [
     react(),
     VitePWA({
@@ -31,3 +32,4 @@ export default defineConfig({
     }),
   ],
 })
+
