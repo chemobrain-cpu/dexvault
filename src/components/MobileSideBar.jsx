@@ -2,7 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import { FaTachometerAlt, FaUserAlt, FaCreditCard, FaBell, FaCog, FaSignOutAlt } from 'react-icons/fa';
-import styles from './Sidebar.module.css';
+import styles from './MobileSidebar.module.css';
+
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (

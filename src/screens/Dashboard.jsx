@@ -10,7 +10,7 @@ import MarketTrend from '../components/MarketTrend';
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import { FaArrowDown, FaArrowUp, FaExchangeAlt } from 'react-icons/fa';
 import BuyModal from '../Modal/BuyModal';
-import Sidebar from '../components/SideBar';
+import Sidebar from '../components/MobileSideBar';
 import BottomTabs from '../components/BottomTabs';
 //import styles from '../../components/Sidebar.module.css';
 import { MdArrowDownward } from 'react-icons/md';
@@ -19,6 +19,7 @@ import Transaction from '../components/Transaction';
 
 import 'react-activity/dist/library.css'; // 👈 important
 import { Spinner } from 'react-activity';
+import DesktopSideBar from '../components/DesktopSideBar';
 
 
 
@@ -63,7 +64,6 @@ const transactions = [
 
 
 const Dashboard = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [cryptoData, setCryptoData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('tab1');
@@ -98,7 +98,6 @@ const Dashboard = () => {
                 );
 
                 setCryptoData(response.data);
-                console.log(response.data);
                 setLoading(false);
 
             } catch (error) {
@@ -158,8 +157,9 @@ const Dashboard = () => {
 
 
 
-
-
+    const notificationHandler = () => {
+        navigate('/notifications')
+    }
 
 
 
@@ -168,28 +168,10 @@ const Dashboard = () => {
         <>
             {openBuyModal && <BuyModal buyFun={buyFunction} sellFun={sellFunction} />}
             {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
+
             <div className={styles.dashboard}>
                 <div className={styles.leftSection}>
-                    <div className={styles.sidebarContent}>
-                        <h2 className={styles.sidebarTitle}>Dexvault</h2>
-                        <nav className={styles.nav}>
-                            <Link to="/home" className={styles.navItem}>
-                                <FaHome /> <p>Home</p>
-                            </Link>
-                            <Link to="/wallet" className={styles.navItem}>
-                                <FaWallet /> <p>Assets</p>
-                            </Link>
-                            <Link to="/analytics" className={styles.navItem}>
-                                <FaChartLine /> <p>Trade</p>
-                            </Link>
-                            <Link to="/analytics" className={styles.navItem}>
-                                <FaBell /> <p>Notifications</p>
-                            </Link>
-                            <Link to="/settings" className={styles.navItem}>
-                                <FaCog /> <p>Settings</p>
-                            </Link>
-                        </nav>
-                    </div>
+                    <DesktopSideBar/>
                 </div>
 
                 {/*  sidebar content */}
@@ -200,8 +182,8 @@ const Dashboard = () => {
                 <div className={styles.mainSection}>
                     <div className={styles.headerContainer}>
                         <div className={styles.mobileHeader}>
-                            <HiMenu color={sidebarOpen ? 'white' : 'black'} size={30} className={styles.hamburger} onClick={openMobileMenu} />
-                            <FaBell color='black' size={30} className={styles.bell} onClick={openMobileMenu} />
+                            <HiMenu color={sidebarOpen ? 'white' : 'black'} size={25} className={styles.hamburger} onClick={openMobileMenu} />
+                            <FaBell color='black' size={25} className={styles.bell} onClick={notificationHandler} />
                         </div>
 
                         <div className={styles.title}>

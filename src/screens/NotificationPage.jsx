@@ -1,43 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './Send.module.css';
+import styles from './NotificationPage.module.css';
 import { FaHome, FaWallet, FaChartLine, FaCog, FaBell, FaUser } from 'react-icons/fa';
 import axios from 'axios';
-import { FaArrowDown, FaArrowUp, FaExchangeAlt } from 'react-icons/fa';
 import BuyModal from '../Modal/BuyModal';
 import { HiArrowLeft } from 'react-icons/hi';
-import Transaction from '../components/Transaction';
 import 'react-activity/dist/library.css';
+import {
+    Bitcoin,
+    ArrowDownLeft,
+    ArrowUpRight,
+    DollarSign,
+} from "lucide-react"
 import DesktopSideBar from '../components/DesktopSideBar';
 
-const transactions = [
-    {
-        id: 1,
-        type: 'Received',
-        asset: 'BTC',
-        amount: '+0.005',
-        date: 'Apr 6, 2025',
-        icon: <FaArrowDown className={styles.iconReceived} />
-    },
-    {
-        id: 2,
-        type: 'Sent',
-        asset: 'ETH',
-        amount: '-0.2',
-        date: 'Apr 5, 2025',
-        icon: <FaArrowUp className={styles.iconSent} />
-    },
-    {
-        id: 3,
-        type: 'Swap',
-        asset: 'USDT to BTC',
-        amount: '$250',
-        date: 'Apr 4, 2025',
-        icon: <FaExchangeAlt className={styles.iconSwap} />
-    }
-];
-
-const Send = () => {
+const Notification = () => {
     const [cryptoData, setCryptoData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openBuyModal, setOpenBuyModal] = useState(false);
@@ -71,8 +48,6 @@ const Send = () => {
     const openSendModalFun = () => setOpenSendModal(true);
     const buyFunction = () => setOpenBuyModal(false);
     const sellFunction = () => setOpenBuyModal(false);
-    const sendFunction = () => setOpenSendModal(false);
-    const receiveFunction = () => setOpenSendModal(false);
     const navigateHandler = () => navigate(-1);
 
     return (
@@ -89,7 +64,7 @@ const Send = () => {
                             <div className={styles.hamburger}>
                                 <HiArrowLeft color={'black'} size={25} onClick={navigateHandler} />
                             </div>
-                            <h2>Send Asset</h2>
+                            <h2>Notifications</h2>
                         </div>
                         <div className={styles.title}><h2></h2></div>
                         <div className={styles.buttonContainer}>
@@ -104,43 +79,56 @@ const Send = () => {
                         <div className={styles.dashboardContentleft}>
 
 
-                            <div className={styles.balanceSection}>
-                                <div className={styles.balanceCard}>
-                                    <p className={styles.amount}>$500.00</p>
-                                    <p className={styles.amounttext}>Your wallet balance</p>
+                            <div className={styles.notificationContainer}>
+                                <div className={styles.notificationItem}>
+                                    <Bitcoin className={styles.notificationIcon} />
+                                    <div>
+                                        <h4 className={styles.notificationTitle}>Bitcoin Purchase</h4>
+                                        <p className={styles.notificationText}>You bought 0.005 BTC for $150</p>
+                                    </div>
+                                    <span className={styles.notificationTime}>2h ago</span>
+                                </div>
 
+                                <div className={styles.notificationItem}>
+                                    <ArrowUpRight className={styles.notificationIcon} />
+                                    <div>
+                                        <h4 className={styles.notificationTitle}>Ethereum Transfer</h4>
+                                        <p className={styles.notificationText}>0.03 ETH sent to 0x34A...E90</p>
+                                    </div>
+                                    <span className={styles.notificationTime}>5h ago</span>
+                                </div>
 
+                                <div className={styles.notificationItem}>
+                                    <ArrowDownLeft className={styles.notificationIcon} />
+                                    <div>
+                                        <h4 className={styles.notificationTitle}>USDT Received</h4>
+                                        <p className={styles.notificationText}>You received $200 USDT</p>
+                                    </div>
+                                    <span className={styles.notificationTime}>Yesterday</span>
+                                </div>
+
+                                <div className={styles.notificationItem}>
+                                    <ArrowDownLeft className={styles.notificationIcon} />
+                                    <div>
+                                        <h4 className={styles.notificationTitle}>USDT Received</h4>
+                                        <p className={styles.notificationText}>You received $200 USDT</p>
+                                    </div>
+                                    <span className={styles.notificationTime}>Yesterday</span>
+                                </div>
+
+                                <div className={styles.notificationItem}>
+                                    <ArrowDownLeft className={styles.notificationIcon} />
+                                    <div>
+                                        <h4 className={styles.notificationTitle}>USDT Received</h4>
+                                        <p className={styles.notificationText}>You received $200 USDT</p>
+                                    </div>
+                                    <span className={styles.notificationTime}>Yesterday</span>
                                 </div>
                             </div>
 
-
-
-
-
-
-
-
-
-                            <div className={styles.sendBox}>
-
-                                <label className={styles.label}>Recipient Address</label>
-                                <input type="text" className={styles.inputField} placeholder="Enter wallet address" />
-
-                                <label className={styles.label}>Asset</label>
-                                <select className={styles.inputField}>
-                                    <option value="btc">Bitcoin (BTC)</option>
-                                    <option value="eth">Ethereum (ETH)</option>
-                                    <option value="usdt">Tether (USDT)</option>
-                                </select>
-
-                                <label className={styles.label}>Amount</label>
-                                <input type="number" className={styles.inputField} placeholder="Enter amount" />
-
-                                <button className={styles.sendButton}>Send</button>
-                            </div>
                         </div>
                         <div className={styles.dashboardContentright}>
-                            <Transaction transactions={transactions} />
+
                         </div>
                     </div>
                 </div>
@@ -149,4 +137,4 @@ const Send = () => {
     );
 };
 
-export default Send;
+export default Notification;

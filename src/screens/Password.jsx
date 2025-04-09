@@ -41,9 +41,9 @@ export default function PasscodeScreen() {
                     setIsAuthError(true)
                     setAuthInfo('Passcode does not match')
                 }
-                alert('done')
+             
                 //navigate to notification triggering page!!!!
-                navigate('Home')
+                navigate(`/dashboard`)
             }
         }
     };

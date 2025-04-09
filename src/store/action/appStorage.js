@@ -364,13 +364,18 @@ export const checkPasscode = (data) => {
           message: data.response.message,
         }
       }
-  
-      if (response.status === 200) {
-        let data = await response.json()
 
+      if (response.status === 200) {
+        //dispatching the LOGIN action
+        await AsyncStorage.setItem('tokenExpiry', `${data.response.expiresIn}`);
+        await AsyncStorage.setItem('token', data.response.token);
+        await AsyncStorage.setItem('userId', data.response.user._id);
+
+        dispatch({ type: LOGIN, payload: data.response })
         //dispatch login 
         return {
           bool: true,
+          message: data.response,
         }
       }
 

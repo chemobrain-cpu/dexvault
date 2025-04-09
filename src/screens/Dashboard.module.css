@@ -14,69 +14,11 @@
 
 .dashboard .leftSection {
     width: 20%;
-
-}
-
-.dashboard .leftSection,
-.sidebarContent {
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 255, 255);
 
 }
-
-.sidebarContent {
-    font-family: 'ABeeZee', sans-serif;
-}
-
-.sidebarTitle {
-    font-weight: 900;
-    color: #3498db;
-    margin-bottom: 40px;
-    padding-left: 10px;
-    margin-top: 5px;
-
-}
-
-.nav {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-}
-
-.navItem {
-    font-weight: 900;
-    color: rgb(107, 107, 107);
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    width: 200px;
-    border-radius: 30px;
-    justify-content: flex-start;
-    box-sizing: border-box;
-    padding-left: 40px;
-    font-size: 17px;
-    transition: background-color 0.6s ease, color 0.6s ease;
-}
-
-.navItem:nth-of-type(2) {
-    background-color: #f6f6f6;
-    color: #3498db;
-}
-
-
-.navItem:hover {
-    background-color: #f5f5f5;
-    color: #3498db;
-
-}
-
-
-
-.navItem p {
-    margin-left: 10px;
-}
-
 
 
 .dashboard .mainSection {
@@ -175,11 +117,12 @@
     padding: 10px;
     padding-right: 15px;
     display: none;
-    position:sticky;
+    position: sticky;
     top: 0;
-    right:0;
+    right: 0;
     left: 0px;
-    z-index: 1000; /* Add this to prevent content underneath from showing through */
+    z-index: 1000;
+    /* Add this to prevent content underneath from showing through */
 }
 
 
@@ -219,50 +162,43 @@
 }
 
 
-
-
-
-
 .balanceCard {
-    position: relative; /* Ensure pseudo-element is scoped to this */
-    overflow: hidden;   /* Hide the animated gradient overflow */
+    position: relative;
+    /* Ensure pseudo-element is scoped to this */
+    overflow: hidden;
+    /* Hide the animated gradient overflow */
     /* Other styles you already have for the card (background, padding, etc.) */
-  }
-  
-  .balanceCard::before {
+}
+
+.balanceCard::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.6) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0) 100%);
     animation: lightReflection 4s infinite linear;
     z-index: 1;
     pointer-events: none;
-  }
-  
-  @keyframes lightReflection {
+}
+
+@keyframes lightReflection {
     0% {
-      left: -100%;
+        left: -100%;
     }
+
     50% {
-      left: 100%;
+        left: 100%;
     }
+
     100% {
-      left: 100%;
+        left: 100%;
     }
-  }
-  
-
-
-
-
+}
 
 .balanceCard .amount {
     text-align: center;
@@ -272,7 +208,6 @@
     font-family: 'ABeeZee', sans-serif;
     margin-bottom: 10px;
 }
-
 
 .balanceCard .amounttext {
     margin-top: 0px;
@@ -393,41 +328,43 @@
 }
 
 .desktopMainSection {
-    position: relative;  /* Scope the ::before within this section */
-    overflow: hidden;    /* Prevent the light effect from spilling out */
+    position: relative;
+    /* Scope the ::before within this section */
+    overflow: hidden;
+    /* Prevent the light effect from spilling out */
     /* Add your normal styles here */
-  }
-  
-  .desktopMainSection::before {
+}
+
+.desktopMainSection::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.6) 50%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0) 100%);
     animation: lightReflection 5s infinite linear;
     z-index: 1;
     pointer-events: none;
-  }
-  
-  @keyframes lightReflection {
+}
+
+@keyframes lightReflection {
     0% {
-      left: -100%;
+        left: -100%;
     }
+
     50% {
-      left: 100%;
+        left: 100%;
     }
+
     100% {
-      left: 100%;
+        left: 100%;
     }
-  }
-  
+}
+
 .desktopamounttext {
     font-size: 18px;
     margin-bottom: 0px;
@@ -446,7 +383,6 @@
 }
 
 /* styling the desktop tab section*/
-
 
 .desktoptabsContainer {
     display: flex;
@@ -574,16 +510,7 @@
 
 
 @media (max-width: 850px) {
-    .navItem p {
-        display: none;
-    }
-
-    .navItem {
-        padding: 12px;
-        display: flex;
-        width: 100px;
-        font-size: 20px;
-    }
+   
 
     .dashboard .leftSection {
         width: 18%;
@@ -697,5 +624,3 @@
     }
 
 }
-
-

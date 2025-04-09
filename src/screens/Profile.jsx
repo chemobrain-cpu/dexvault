@@ -1,43 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './Send.module.css';
+import styles from './Profile.module.css';
 import { FaHome, FaWallet, FaChartLine, FaCog, FaBell, FaUser } from 'react-icons/fa';
 import axios from 'axios';
-import { FaArrowDown, FaArrowUp, FaExchangeAlt } from 'react-icons/fa';
 import BuyModal from '../Modal/BuyModal';
 import { HiArrowLeft } from 'react-icons/hi';
-import Transaction from '../components/Transaction';
 import 'react-activity/dist/library.css';
 import DesktopSideBar from '../components/DesktopSideBar';
 
-const transactions = [
-    {
-        id: 1,
-        type: 'Received',
-        asset: 'BTC',
-        amount: '+0.005',
-        date: 'Apr 6, 2025',
-        icon: <FaArrowDown className={styles.iconReceived} />
-    },
-    {
-        id: 2,
-        type: 'Sent',
-        asset: 'ETH',
-        amount: '-0.2',
-        date: 'Apr 5, 2025',
-        icon: <FaArrowUp className={styles.iconSent} />
-    },
-    {
-        id: 3,
-        type: 'Swap',
-        asset: 'USDT to BTC',
-        amount: '$250',
-        date: 'Apr 4, 2025',
-        icon: <FaExchangeAlt className={styles.iconSwap} />
-    }
-];
 
-const Send = () => {
+const Profile = () => {
     const [cryptoData, setCryptoData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [openBuyModal, setOpenBuyModal] = useState(false);
@@ -71,8 +43,6 @@ const Send = () => {
     const openSendModalFun = () => setOpenSendModal(true);
     const buyFunction = () => setOpenBuyModal(false);
     const sellFunction = () => setOpenBuyModal(false);
-    const sendFunction = () => setOpenSendModal(false);
-    const receiveFunction = () => setOpenSendModal(false);
     const navigateHandler = () => navigate(-1);
 
     return (
@@ -89,7 +59,7 @@ const Send = () => {
                             <div className={styles.hamburger}>
                                 <HiArrowLeft color={'black'} size={25} onClick={navigateHandler} />
                             </div>
-                            <h2>Send Asset</h2>
+                            <h2>Profile</h2>
                         </div>
                         <div className={styles.title}><h2></h2></div>
                         <div className={styles.buttonContainer}>
@@ -102,14 +72,46 @@ const Send = () => {
 
                     <div className={styles.dashboardContent}>
                         <div className={styles.dashboardContentleft}>
+                            {/* profile code goes in here*/}
 
+                            <div className={styles.profileCard}>
+                                <div className={styles.profileTop}>
+                                    <div className={styles.avatarWrapper}>
+                                        <img
+                                            src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=3&w=200&h=200&q=80"
+                                            alt="User Avatar"
+                                            className={styles.avatar}
+                                        />
+                                    </div>
+                                    <div className={styles.userDetails}>
+                                        <h2 className={styles.name}>Satoshi Nakamoto</h2>
+                                        <p className={styles.email}>satoshi@cryptovault.io</p>
+                                    </div>
+                                </div>
 
-                            <div className={styles.balanceSection}>
-                                <div className={styles.balanceCard}>
-                                    <p className={styles.amount}>$500.00</p>
-                                    <p className={styles.amounttext}>Your wallet balance</p>
+                                <div className={styles.divider} />
 
+                                <div className={styles.detailsSection}>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.label}>Wallet Address</span>
+                                        <p className={styles.value}>0x9f1d...42A9</p>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.label}>Default Token</span>
+                                        <p className={styles.value}>USDT</p>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.label}>Network</span>
+                                        <p className={styles.value}>Ethereum Mainnet</p>
+                                    </div>
+                                    <div className={styles.detailItem}>
+                                        <span className={styles.label}>2FA Status</span>
+                                        <p className={styles.value}>Enabled</p>
+                                    </div>
+                                </div>
 
+                                <div className={styles.buttonWrapper}>
+                                    <button className={styles.editProfileBtn}>Edit Profile</button>
                                 </div>
                             </div>
 
@@ -117,30 +119,9 @@ const Send = () => {
 
 
 
-
-
-
-
-                            <div className={styles.sendBox}>
-
-                                <label className={styles.label}>Recipient Address</label>
-                                <input type="text" className={styles.inputField} placeholder="Enter wallet address" />
-
-                                <label className={styles.label}>Asset</label>
-                                <select className={styles.inputField}>
-                                    <option value="btc">Bitcoin (BTC)</option>
-                                    <option value="eth">Ethereum (ETH)</option>
-                                    <option value="usdt">Tether (USDT)</option>
-                                </select>
-
-                                <label className={styles.label}>Amount</label>
-                                <input type="number" className={styles.inputField} placeholder="Enter amount" />
-
-                                <button className={styles.sendButton}>Send</button>
-                            </div>
                         </div>
                         <div className={styles.dashboardContentright}>
-                            <Transaction transactions={transactions} />
+
                         </div>
                     </div>
                 </div>
@@ -149,4 +130,6 @@ const Send = () => {
     );
 };
 
-export default Send;
+
+
+export default Profile;

@@ -10,6 +10,7 @@ import { HiArrowLeft } from 'react-icons/hi';
 import Transaction from '../components/Transaction';
 import 'react-activity/dist/library.css'; // 👈 important
 import { Spinner } from 'react-activity';
+import DesktopSideBar from '../components/DesktopSideBar';
 
 
 
@@ -145,26 +146,7 @@ const SellAsset = () => {
             {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
             <div className={styles.dashboard}>
                 <div className={styles.leftSection}>
-                    <div className={styles.sidebarContent}>
-                        <h2 className={styles.sidebarTitle}>Dexvault</h2>
-                        <nav className={styles.nav}>
-                            <Link to="/home" className={styles.navItem}>
-                                <FaHome /> <p>Home</p>
-                            </Link>
-                            <Link to="/wallet" className={styles.navItem}>
-                                <FaWallet /> <p>Assets</p>
-                            </Link>
-                            <Link to="/analytics" className={styles.navItem}>
-                                <FaChartLine /> <p>Trade</p>
-                            </Link>
-                            <Link to="/analytics" className={styles.navItem}>
-                                <FaBell /> <p>Notifications</p>
-                            </Link>
-                            <Link to="/settings" className={styles.navItem}>
-                                <FaCog /> <p>Settings</p>
-                            </Link>
-                        </nav>
-                    </div>
+                    <DesktopSideBar/>
                 </div>
 
                 <div className={styles.mainSection}>
@@ -173,7 +155,7 @@ const SellAsset = () => {
                             <div className={styles.hamburger}>
                                 <HiArrowLeft
                                     color={'black'}
-                                    size={30}
+                                    size={25}
                                     onClick={navigateHandler} // Or replace with your go back logic
                                 />
 

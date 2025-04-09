@@ -11,6 +11,7 @@ import {
     FaNetworkWired, FaCoins, FaGasPump, FaSearchLocation,
     FaSun, FaLanguage, FaDollarSign, FaNewspaper
 } from 'react-icons/fa';
+import DesktopSideBar from '../components/DesktopSideBar';
 
 
 
@@ -38,23 +39,14 @@ const Settings = () => {
             {openSendModal && <SendModal sendFun={sendFunction} receiveFun={receiveFunction} />}
             <div className={styles.dashboard}>
                 <div className={styles.leftSection}>
-                    <div className={styles.sidebarContent}>
-                        <h2 className={styles.sidebarTitle}>Dexvault</h2>
-                        <nav className={styles.nav}>
-                            <Link to="/home" className={styles.navItem}><FaHome /> <p>Home</p></Link>
-                            <Link to="/wallet" className={styles.navItem}><FaWallet /> <p>Assets</p></Link>
-                            <Link to="/analytics" className={styles.navItem}><FaChartLine /> <p>Trade</p></Link>
-                            <Link to="/analytics" className={styles.navItem}><FaBell /> <p>Notifications</p></Link>
-                            <Link to="/settings" className={styles.navItem}><FaCog /> <p>Settings</p></Link>
-                        </nav>
-                    </div>
+                    <DesktopSideBar/>
                 </div>
 
                 <div className={styles.mainSection}>
                     <div className={styles.headerContainer}>
                         <div className={styles.mobileHeader}>
                             <div className={styles.hamburger}>
-                                <HiArrowLeft color={'black'} size={30} onClick={navigateHandler} />
+                                <HiArrowLeft color={'black'} size={25} onClick={navigateHandler} />
                             </div>
                             <h2>Settings</h2>
                         </div>
