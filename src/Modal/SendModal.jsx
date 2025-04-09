@@ -11,7 +11,7 @@ const SendModal = ({ modalVisible,sendFun,receiveFun }) => {
 
 
   const navigateSend = ()=>{
-    navigate('/seend-assets')
+    navigate('/send-assets')
   }
 
 

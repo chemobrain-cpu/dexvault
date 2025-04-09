@@ -99,6 +99,7 @@ const SellAsset = () => {
             navigateHandler={navigateHandler}
             openBuyModalFun={openBuyModalFun}
             openSendModalFun={openSendModalFun}
+            title='Select Asset'
           />
 
           <div className={styles.dashboardContent}>

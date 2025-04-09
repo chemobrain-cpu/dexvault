@@ -3,14 +3,14 @@ import { HiArrowLeft } from 'react-icons/hi';
 import { FaBell, FaUser } from 'react-icons/fa';
 import styles from './BackHeader.module.css'; // Make sure the CSS file path is correct
 
-const BackHeader = ({ navigateHandler, openBuyModalFun, openSendModalFun }) => {
+const BackHeader = ({ navigateHandler, openBuyModalFun, openSendModalFun,title }) => {
   return (
     <div className={styles.headerContainer}>
       <div className={styles.mobileHeader}>
         <div className={styles.hamburger}>
           <HiArrowLeft color="black" size={25} onClick={navigateHandler} />
         </div>
-        <h2>Notifications</h2>
+        <h2>{title}</h2>
       </div>
 
       <div className={styles.title}>

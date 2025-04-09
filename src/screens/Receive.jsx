@@ -90,6 +90,7 @@ const ReceiveAsset = () => {
                         navigateHandler={navigateHandler}
                         openBuyModalFun={openBuyModalFun}
                         openSendModalFun={openSendModalFun}
+                        title='Receive'
                     />
 
                     <div className={styles.dashboardContent}>

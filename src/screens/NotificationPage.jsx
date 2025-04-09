@@ -68,6 +68,7 @@ const Notification = () => {
                         navigateHandler={navigateHandler}
                         openBuyModalFun={openBuyModalFun}
                         openSendModalFun={openSendModalFun}
+                        title='Notification'
                     />
 
 

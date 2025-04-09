@@ -41,6 +41,7 @@ const Settings = () => {
             navigateHandler={navigateHandler}
             openBuyModalFun={openBuyModalFun}
             openSendModalFun={openSendModalFun}
+            title='Settings'
           />
 
           <div className={styles.dashboardContent}>

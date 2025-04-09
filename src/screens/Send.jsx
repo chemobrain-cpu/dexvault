@@ -96,6 +96,7 @@ const Send = () => {
             navigateHandler={navigateHandler}
             openBuyModalFun={openBuyModalFun}
             openSendModalFun={openSendModalFun}
+            title='Send Asset'
           />
 
           <div className={styles.dashboardContent}>

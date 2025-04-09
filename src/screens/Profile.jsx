@@ -62,6 +62,7 @@ const Profile = () => {
                         navigateHandler={navigateHandler} // Pass the navigateHandler to BackHeader
                         openBuyModalFun={openBuyModalFun} // Pass the function to open the Buy Modal
                         openSendModalFun={openSendModalFun} // Pass the function to open the Send Modal
+                        title='Profile'
                     />
 
                     <div className={styles.dashboardContent}>
