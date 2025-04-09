@@ -345,28 +345,30 @@ export const checkPasscode = (data) => {
         let data = await response.json()
         return {
           bool: false,
-          message: data.response.message,
+          message: data.response
         }
       }
       if (response.status === 404) {
         let data = await response.json()
         return {
           bool: false,
-          message: data.response.message,
+          message: data.response,
         }
       }
       if (response.status === 401) {
         let data = await response.json()
         return {
           bool: false,
-          message: data.response.message,
+          message: data.response
         }
       }
       if (response.status === 500) {
         let data = await response.json()
+        console.log(data)
         return {
           bool: false,
-          message: data.response.message,
+          message: data.response
+          ,
         }
       }
 

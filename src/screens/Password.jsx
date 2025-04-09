@@ -17,7 +17,7 @@ export default function PasscodeScreen() {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation()
-    const dispatch = useDispatch
+    const dispatch = useDispatch()
 
     const {
         email
@@ -41,7 +41,7 @@ export default function PasscodeScreen() {
 
                 if (!res.bool) {
                     setIsAuthError(true)
-                    setAuthInfo('Passcode does not match')
+                    setAuthInfo(res.message)
                     return
                 }
              
